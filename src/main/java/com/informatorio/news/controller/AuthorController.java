@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 @RestController
@@ -47,7 +48,16 @@ public class AuthorController {
 
     }
     @GetMapping()
-    public List<Author> getAll(){
-        return authorRepository.findAll();
+    public List<AuthorDTO> getAll(){
+        List<Author> author= authorRepository.findAll();
+       return author.stream().map(author1 -> authorConverter.toDTO(author1)).collect(Collectors.toList());
+
+    }
+
+    @GetMapping("/name")
+    public AuthorDTO searchAuthor(@RequestParam String fullName){
+       Author author = authorRepository.findByFullName(fullName);
+        Author author1 = author;
+        return authorConverter.toDTO(author1);
     }
 }

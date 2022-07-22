@@ -1,28 +1,21 @@
 package com.informatorio.news.dto;
 
 
-import com.informatorio.news.domain.Article;
 
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class AuthorDTO {
 
-
-
-    private Integer id;
     private String name;
     private  String lastname;
-    private List<Article> articles = new ArrayList<>();
+    private String fullName;
 
 
-    public AuthorDTO(Integer id, String name, String lastname, List articles) {
 
-        this.id = id;
+
+    public AuthorDTO(String name, String lastname) {
         this.name = name;
         this.lastname = lastname;
-        this.articles = articles;
+        this.fullName = name + lastname;
 
     }
 
@@ -31,15 +24,6 @@ public class AuthorDTO {
 
 
 
-
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
 
     public String getName() {
         return name;
@@ -57,11 +41,13 @@ public class AuthorDTO {
         this.lastname = lastname;
     }
 
-    public List<Article> getArticles() {
-        return articles;
+    public String getFullName() {
+        return fullName;
     }
 
-    public void setArticles(List<Article> articles) {
-        this.articles = articles;
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
     }
+
+
 }

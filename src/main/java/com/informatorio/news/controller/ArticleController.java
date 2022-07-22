@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/article")
@@ -26,6 +27,7 @@ public class ArticleController {
         this.articleRepository = articleRepository;
         this.articleConverter = articleConverter;
 
+
     }
 
     @PostMapping()
@@ -35,14 +37,26 @@ public class ArticleController {
     }
 
 
-    @GetMapping()
-    public List <Article> getAll(){
 
-        return  articleRepository.findAll();
-  }
+    @GetMapping()
+    public List <ArticleDTO> getAll(){
+        List<Article> articles = articleRepository.findAll();
+      return articles.stream().map(article -> articleConverter.toDto(article)).collect(Collectors.toList());
+    }
 
   @DeleteMapping("/{id}")
      public void deleteArticle(@PathVariable Integer id){
         articleRepository.deleteById(id);
   }
+
+    @PutMapping("{id}")
+    public ResponseEntity<ArticleDTO> updateArticle( @PathVariable Integer id,@RequestBody Article article){
+        Article articleSelect =  articleRepository.findById(id).orElse(null);
+        articleSelect.setId(id);
+        articleSelect.setTitle(article.getTitle());
+        articleSelect.setDescription(article.getDescription());
+        Article articleUpdated = articleRepository.save(articleSelect);
+        return new ResponseEntity<ArticleDTO>(articleConverter.toDto(articleUpdated),HttpStatus.OK);
+
+    }
 }

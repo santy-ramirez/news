@@ -3,7 +3,7 @@ package com.informatorio.news.domain;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
+
 
 
 @Entity
@@ -16,6 +16,8 @@ public class Author {
 
     private String name;
     private  String lastname;
+
+    private String fullName ;
     @OneToMany(mappedBy = "author", cascade = CascadeType.ALL)
     private List<Article> articles = new ArrayList<>();
 
@@ -25,6 +27,7 @@ public class Author {
         this.name = name;
         this.lastname = lastname;
         this.articles = articles;
+        this.fullName = name + lastname;
 
     }
 
@@ -61,5 +64,13 @@ public class Author {
 
     public void setArticles(List<Article> articles) {
         this.articles = articles;
+    }
+
+    public String getFullName() {
+        return fullName;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
     }
 }

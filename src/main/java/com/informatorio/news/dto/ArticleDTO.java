@@ -8,19 +8,27 @@ public class ArticleDTO {
     private Integer id;
     private String title;
     private String description;
-    private Author author;
+
+    private AuthorDTO authorDTO;
 
 
 
-    public ArticleDTO(Integer id, String title, String description, Author author) {
+    public ArticleDTO(Integer id, String title, String description) {
         this.id = id;
         this.title = title;
         this.description = description;
-        this.author = author;
+
 
     }
 
     public ArticleDTO() {
+    }
+
+    public ArticleDTO(Integer id, String title, String description, AuthorDTO authorDTO) {
+        this.id = id;
+        this.title = title;
+        this.description = description;
+        this.authorDTO = authorDTO;
     }
 
     public Integer getId() {
@@ -47,11 +55,12 @@ public class ArticleDTO {
         this.description = description;
     }
 
-    public Author getAuthor() {
-        return author;
+
+    public AuthorDTO getAuthorDTO() {
+        return authorDTO;
     }
 
-    public void setAuthor(Author author) {
-        this.author = author;
+    public void setAuthorDTO(AuthorDTO authorDTO) {
+        this.authorDTO = authorDTO;
     }
 }
