@@ -21,8 +21,6 @@ public class ArticleController {
     @Autowired
     private ArticleConverter articleConverter;
 
-
-
     public ArticleController(ArticleRepository articleRepository,  ArticleConverter articleConverter) {
         this.articleRepository = articleRepository;
         this.articleConverter = articleConverter;
@@ -30,13 +28,13 @@ public class ArticleController {
 
     }
 
+
+
     @PostMapping()
     public ResponseEntity<ArticleDTO>  createUser(@RequestBody  Article article){
         Article article1 = articleRepository.save(article);
         return new ResponseEntity<ArticleDTO>(articleConverter.toDto(article1), HttpStatus.CREATED) ;
     }
-
-
 
     @GetMapping()
     public List <ArticleDTO> getAll(){
@@ -44,7 +42,7 @@ public class ArticleController {
       return articles.stream().map(article -> articleConverter.toDto(article)).collect(Collectors.toList());
     }
 
-  @DeleteMapping("/{id}")
+    @DeleteMapping("/{id}")
      public void deleteArticle(@PathVariable Integer id){
         articleRepository.deleteById(id);
   }

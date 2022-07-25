@@ -5,10 +5,12 @@ import com.informatorio.news.domain.Author;
 import com.informatorio.news.dto.AuthorDTO;
 import com.informatorio.news.repository.AuthorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -55,9 +57,16 @@ public class AuthorController {
     }
 
     @GetMapping("/name")
-    public AuthorDTO searchAuthor(@RequestParam String fullName){
-       Author author = authorRepository.findByFullName(fullName);
+    public AuthorDTO searchAuthor(@RequestParam String name){
+       Author author = authorRepository.findByName(name);
         Author author1 = author;
         return authorConverter.toDTO(author1);
+    }
+
+    @GetMapping("/alldate")
+    public List<Author> getForDate(@RequestParam("localDate")
+                                       @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate localDate){
+       List <Author> getDate = authorRepository.findByCreateAt(localDate);
+        return  getDate;
     }
 }

@@ -14,14 +14,15 @@ public class Article {
     @ManyToOne(fetch = FetchType.LAZY)
     private Author author;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Source source;
 
-
-
-    public Article(Integer id, String title, String description,Author author) {
+    public Article(Integer id, String title, String description,Author author,Source source) {
         this.id = id;
         this.title = title;
         this.description = description;
         this.author = author;
+        this.source = source;
 
 
     }
@@ -59,5 +60,13 @@ public class Article {
 
     public void setAuthor(Author author) {
         this.author = author;
+    }
+
+    public Source getSource() {
+        return source;
+    }
+
+    public void setSource(Source source) {
+        this.source = source;
     }
 }

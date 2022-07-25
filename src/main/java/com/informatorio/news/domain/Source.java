@@ -5,36 +5,25 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-
-
 @Entity
-public class Author {
+public class Source {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-
-
     private Integer id;
-
     private String name;
-    private  String lastname;
-
-    private String fullName ;
+    private String code;
     private LocalDate createAt;
-    @OneToMany(mappedBy = "author", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "source", cascade = CascadeType.ALL)
     private List<Article> articles = new ArrayList<>();
 
-
-    public Author(Integer id, String name, String lastname,LocalDate createAt, List articles) {
+    public Source(Integer id, String name, String code, LocalDate createAt) {
         this.id = id;
         this.name = name;
-        this.lastname = lastname;
+        this.code = code;
         this.createAt = createAt;
-        this.articles = articles;
-        this.fullName = name + lastname;
-
     }
 
-    public Author() {
+    public Source() {
     }
 
     public Integer getId() {
@@ -53,12 +42,12 @@ public class Author {
         this.name = name;
     }
 
-    public String getLastname() {
-        return lastname;
+    public String getCode() {
+        return code;
     }
 
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
+    public void setCode(String code) {
+        this.code = code;
     }
 
     public LocalDate getCreateAt() {
@@ -67,19 +56,5 @@ public class Author {
 
     public void setCreateAt(LocalDate createAt) {
         this.createAt = createAt;
-    }
-
-
-
-    public void setArticles(List<Article> articles) {
-        this.articles = articles;
-    }
-
-    public String getFullName() {
-        return fullName;
-    }
-
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
     }
 }

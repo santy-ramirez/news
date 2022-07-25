@@ -11,9 +11,11 @@ public class ArticleDTO {
 
     private AuthorDTO authorDTO;
 
+    private SourceDTO sourceDTO;
 
 
-    public ArticleDTO(Integer id, String title, String description) {
+
+    public ArticleDTO(Integer id, String title, String description ) {
         this.id = id;
         this.title = title;
         this.description = description;
@@ -24,11 +26,12 @@ public class ArticleDTO {
     public ArticleDTO() {
     }
 
-    public ArticleDTO(Integer id, String title, String description, AuthorDTO authorDTO) {
+    public ArticleDTO(Integer id, String title, String description, AuthorDTO authorDTO,SourceDTO sourceDTO) {
         this.id = id;
         this.title = title;
         this.description = description;
         this.authorDTO = authorDTO;
+        this.sourceDTO = sourceDTO;
     }
 
     public Integer getId() {
@@ -62,5 +65,13 @@ public class ArticleDTO {
 
     public void setAuthorDTO(AuthorDTO authorDTO) {
         this.authorDTO = authorDTO;
+    }
+
+    public SourceDTO getSourceDTO() {
+        return sourceDTO;
+    }
+
+    public void setSourceDTO(SourceDTO sourceDTO) {
+        this.sourceDTO = sourceDTO;
     }
 }
