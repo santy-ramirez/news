@@ -2,6 +2,7 @@ package com.informatorio.news.controller;
 
 import com.informatorio.news.converter.ArticleConverter;
 import com.informatorio.news.domain.Article;
+import com.informatorio.news.domain.Author;
 import com.informatorio.news.dto.ArticleDTO;
 import com.informatorio.news.repository.ArticleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,5 +57,10 @@ public class ArticleController {
         Article articleUpdated = articleRepository.save(articleSelect);
         return new ResponseEntity<ArticleDTO>(articleConverter.toDto(articleUpdated),HttpStatus.OK);
 
+    }
+    @GetMapping("/test")
+    public List<ArticleDTO> getArticles(@RequestParam String query){
+        List<Article> articles = articleRepository.searchArticle(query);
+        return articles.stream().map(article -> articleConverter.toDto(article)).collect(Collectors.toList());
     }
 }
