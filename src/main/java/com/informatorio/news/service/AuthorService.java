@@ -5,6 +5,9 @@ import com.informatorio.news.domain.Author;
 import com.informatorio.news.dto.AuthorDTO;
 import com.informatorio.news.repository.AuthorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -16,9 +19,9 @@ import java.util.stream.Collectors;
 public class AuthorService {
 
     @Autowired
-    private AuthorRepository authorRepository;
+    private final AuthorRepository authorRepository;
     @Autowired
-    private AuthorConverter authorConverter;
+    private final AuthorConverter authorConverter;
 
     public AuthorService(AuthorRepository authorRepository, AuthorConverter authorConverter) {
         this.authorRepository = authorRepository;
