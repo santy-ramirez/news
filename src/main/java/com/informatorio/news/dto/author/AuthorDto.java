@@ -11,6 +11,11 @@ public class AuthorDto extends AuthorBaseDTO {
    private List<ArticleBaseDto> articlesdto;
 
     public AuthorDto(String name, String lastname, LocalDate createAt, String fullName, List<ArticleBaseDto> articleBaseDtos) {
+        this.setName(name);
+        this.setLastname(lastname);
+        this.setCreateAt(createAt);
+        this.fullName= fullName;
+        this.articlesdto = articleBaseDtos;
     }
 
     public AuthorDto(String fullName, List<ArticleBaseDto> articlesdto) {

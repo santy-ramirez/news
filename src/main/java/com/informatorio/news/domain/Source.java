@@ -16,11 +16,12 @@ public class Source {
     @OneToMany(mappedBy = "source", cascade = CascadeType.ALL)
     private List<Article> articles = new ArrayList<>();
 
-    public Source(Integer id, String name, String code, LocalDate createAt) {
+    public Source(Integer id, String name, String code, LocalDate createAt,List<Article> articles) {
         this.id = id;
         this.name = name;
         this.code = code;
         this.createAt = createAt;
+        this.articles = articles;
     }
 
     public Source() {
@@ -56,5 +57,13 @@ public class Source {
 
     public void setCreateAt(LocalDate createAt) {
         this.createAt = createAt;
+    }
+
+    public List<Article> getArticles() {
+        return articles;
+    }
+
+    public void setArticles(List<Article> articles) {
+        this.articles = articles;
     }
 }

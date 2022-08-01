@@ -34,7 +34,7 @@ public class AuthorService {
 
     public AuthorBaseDTO createAuthor(Author author){
         Author authors = authorRepository.save(author);
-        return authorConverter.todtoauthor(authors);
+        return authorConverter.toDtoAuthorBase(authors);
     }
     public AuthorDto actualizarAuthor(Integer id ,Author author){
         Author authorSelect =  authorRepository.findById(id).orElse(null);

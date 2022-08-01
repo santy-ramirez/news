@@ -3,6 +3,7 @@ package com.informatorio.news.controller;
 import com.informatorio.news.converter.ArticleConverter;
 import com.informatorio.news.domain.Article;
 import com.informatorio.news.dto.article.ArticleBaseDto;
+import com.informatorio.news.dto.article.ArticleDto;
 import com.informatorio.news.repository.ArticleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -37,7 +38,7 @@ public class ArticleController {
     }
 
     @GetMapping()
-    public List <ArticleBaseDto> getAll(){
+    public List <ArticleDto> getAll(){
         List<Article> articles = articleRepository.findAll();
       return articles.stream().map(article -> articleConverter.toDto(article)).collect(Collectors.toList());
     }
@@ -60,6 +61,6 @@ public class ArticleController {
     @GetMapping("/test")
     public List<ArticleBaseDto> getArticles(@RequestParam String query){
         List<Article> articles = articleRepository.searchArticle(query);
-        return articles.stream().map(article -> articleConverter.toDto(article)).collect(Collectors.toList());
+        return articles.stream().map(article -> articleConverter.toDtoArticleBase(article)).collect(Collectors.toList());
     }
 }

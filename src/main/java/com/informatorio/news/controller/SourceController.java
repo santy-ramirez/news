@@ -1,7 +1,7 @@
 package com.informatorio.news.controller;
 
 import com.informatorio.news.domain.Source;
-import com.informatorio.news.dto.SourceDTO;
+import com.informatorio.news.dto.source.SourceBaseDTO;
 import com.informatorio.news.service.SourceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,7 +21,7 @@ public class SourceController {
     }
 
     @PostMapping
-    public SourceDTO createSource(@RequestBody  Source source){
+    public SourceBaseDTO createSource(@RequestBody  Source source){
         return sourceService.crearSource(source);
     }
 }

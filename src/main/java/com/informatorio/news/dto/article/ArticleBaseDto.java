@@ -1,7 +1,7 @@
 package com.informatorio.news.dto.article;
 
 public class ArticleBaseDto {
-    private Integer id;
+    Integer id;
     private String title;
     private String description;
 

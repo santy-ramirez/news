@@ -2,7 +2,7 @@ package com.informatorio.news.service;
 
 import com.informatorio.news.converter.SourceConverter;
 import com.informatorio.news.domain.Source;
-import com.informatorio.news.dto.SourceDTO;
+import com.informatorio.news.dto.source.SourceBaseDTO;
 import com.informatorio.news.repository.SourceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,7 +19,7 @@ public class SourceService {
         this.sourceConverter = sourceConverter;
     }
 
-    public SourceDTO crearSource(Source source){
+    public SourceBaseDTO crearSource(Source source){
        Source source1 = sourceRepository.save(source);
         return sourceConverter.toDto(source1);
     }

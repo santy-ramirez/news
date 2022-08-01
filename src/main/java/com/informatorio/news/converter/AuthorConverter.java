@@ -3,10 +3,7 @@ package com.informatorio.news.converter;
 
 import com.informatorio.news.domain.Article;
 import com.informatorio.news.domain.Author;
-import com.informatorio.news.domain.Source;
-import com.informatorio.news.dto.SourceDTO;
 import com.informatorio.news.dto.article.ArticleBaseDto;
-import com.informatorio.news.dto.article.ArticleDto;
 import com.informatorio.news.dto.author.AuthorBaseDTO;
 import com.informatorio.news.dto.author.AuthorDto;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,24 +27,20 @@ public class AuthorConverter {
 
     public AuthorDto toDTO (Author author){
 
-       return new AuthorDto( author.getName(), author.getLastname(),author.getCreateAt(),author.getFullName(), toListArticle2(author.getArticles()));
+       return new AuthorDto( author.getName(), author.getLastname(),author.getCreateAt(),author.getFullName(),toListArticle2( author.getArticles()));
     }
 
+    public List<ArticleBaseDto> toListArticle2(List<Article> articles){
 
-
-
-    public List<ArticleDto> toListArticle2(List<Article> articles){
-
-        List<ArticleDto> articleDTOS= articles.stream().map(article -> toConverArticleDTO(article)).collect(Collectors.toList());
+        List<ArticleBaseDto> articleDTOS= articles.stream().map(article -> toConverArticleDTO(article)).collect(Collectors.toList());
         return articleDTOS;
     }
-    private ArticleDto toConverArticleDTO(Article article){
-        return new ArticleDto(article.getId(),article.getTitle(),article.getDescription(),article.);
+
+    private ArticleBaseDto toConverArticleDTO(Article article){
+        return new ArticleBaseDto(article.getId(),article.getTitle(),article.getDescription());
     }
-public AuthorBaseDTO todtoauthor(Author author){
-        return new AuthorBaseDTO (author.getName(),author.getLastname(),author.getCreateAt());
-}
-public SourceDTO sourceDTO(Source source){
-        return new SourceDTO(source.getId(),source.getName(),source.getCode(),source.getCreateAt());
-}
+
+    public AuthorBaseDTO toDtoAuthorBase(Author author){
+        return new AuthorBaseDTO(author.getName(),author.getLastname(),author.getCreateAt());
+    }
 }

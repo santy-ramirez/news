@@ -1,21 +1,24 @@
-package com.informatorio.news.dto;
+package com.informatorio.news.dto.source;
 
 import java.time.LocalDate;
+import java.time.LocalDate;
+public class SourceBaseDTO {
 
-public class SourceDTO {
-    private Integer id;
-    private String name;
-    private String code;
-    private LocalDate createAt;
 
-    public SourceDTO(Integer id, String name, String code, LocalDate createAt) {
+
+        private Integer id;
+        private String name;
+        private String code;
+        private LocalDate createAt;
+
+    public SourceBaseDTO(Integer id, String name, String code, LocalDate createAt) {
         this.id = id;
         this.name = name;
         this.code = code;
         this.createAt = createAt;
     }
 
-    public SourceDTO() {
+    public SourceBaseDTO() {
     }
 
     public Integer getId() {
