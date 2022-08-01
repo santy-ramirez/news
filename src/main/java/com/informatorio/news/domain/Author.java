@@ -1,6 +1,7 @@
 package com.informatorio.news.domain;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +15,7 @@ public class Author {
 
 
     private Integer id;
+    @NotBlank
 
     private String name;
     private  String lastname;

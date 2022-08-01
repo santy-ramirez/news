@@ -5,12 +5,14 @@ import com.informatorio.news.domain.Author;
 import com.informatorio.news.dto.author.AuthorBaseDTO;
 import com.informatorio.news.dto.author.AuthorDto;
 import com.informatorio.news.service.AuthorService;
+import com.informatorio.news.util.PageCustumer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -29,13 +31,13 @@ public class AuthorController {
 
 
     @PostMapping()
-    public ResponseEntity<AuthorBaseDTO>  createAuthor1(@RequestBody Author author){
+    public ResponseEntity<AuthorBaseDTO>  createAuthor1(@RequestBody @Valid Author author){
         AuthorBaseDTO authors = authorService.createAuthor(author);
         return new ResponseEntity(authors, HttpStatus.CREATED);
     }
 
     @PutMapping("{id}")
-    public ResponseEntity<AuthorDto> updateAuthor( @PathVariable Integer id,@RequestBody Author author){
+    public ResponseEntity<AuthorDto> updateAuthor( @PathVariable() Integer id,@RequestBody Author author){
         AuthorDto authorDTO = authorService.actualizarAuthor(id,author);
         return new ResponseEntity<AuthorDto>(authorDTO,HttpStatus.OK);
 
@@ -46,9 +48,9 @@ public class AuthorController {
     return new ResponseEntity<String>(HttpStatus.NO_CONTENT);
     }
     @GetMapping()
-    public ResponseEntity< List<AuthorDto>> getAll(){
-       List<AuthorDto> authores = authorService.traerTodosLosAuhores();
-       return new ResponseEntity<List<AuthorDto>>(authores,HttpStatus.OK);
+    public ResponseEntity<PageCustumer> getAll(@RequestParam(required = false, defaultValue = "0") int page){
+        PageCustumer authores = authorService.traerTodosLosAuhores(page);
+       return new ResponseEntity<PageCustumer>(authores,HttpStatus.OK);
 
     }
 
@@ -59,8 +61,8 @@ public class AuthorController {
         return  getDate;
     }
     @GetMapping("/test")
-    public List<AuthorDto> getAuthor(@RequestParam String query){
-        List<AuthorDto> authors = authorService.searchForFullName(query);
+    public List<AuthorBaseDTO> getAuthor(@RequestParam String query){
+        List<AuthorBaseDTO> authors = authorService.searchForFullName(query);
         return authors;
     }
 

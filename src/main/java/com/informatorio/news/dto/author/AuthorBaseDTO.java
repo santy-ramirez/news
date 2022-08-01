@@ -1,8 +1,10 @@
 package com.informatorio.news.dto.author;
 
+import javax.validation.constraints.NotBlank;
 import java.time.LocalDate;
 
 public class AuthorBaseDTO {
+
     private String name;
     private  String lastname;
     private LocalDate createAt;

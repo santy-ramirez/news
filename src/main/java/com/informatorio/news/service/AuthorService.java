@@ -6,7 +6,11 @@ import com.informatorio.news.domain.Author;
 import com.informatorio.news.dto.author.AuthorBaseDTO;
 import com.informatorio.news.dto.author.AuthorDto;
 import com.informatorio.news.repository.AuthorRepository;
+import com.informatorio.news.util.PageCustumer;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -49,10 +53,16 @@ public class AuthorService {
         authorRepository.deleteById(id);
     }
 
-    public List<AuthorDto> traerTodosLosAuhores(){
-        List<Author> author= authorRepository.findAll();
-         List<AuthorDto>  authorDTOS = author.stream().map(author1 -> authorConverter.toDTO(author1)).collect(Collectors.toList());
-         return authorDTOS;
+    public PageCustumer traerTodosLosAuhores(int page){
+    Pageable pageable = PageRequest.of(page, 3);
+        Page<Author> page1 = authorRepository.findAll(pageable);
+    PageCustumer pageCustumer = new PageCustumer();
+        pageCustumer.setPage(page1.getSize());
+        pageCustumer.setSize(page1.getTotalPages());
+    pageCustumer.setContent(page1.getContent().stream().map(author -> authorConverter.toDTO(author)).collect(Collectors.toList()));
+
+
+         return pageCustumer;
     }
 
     public List<AuthorDto> searchForDate(LocalDate localDate){
@@ -60,9 +70,9 @@ public class AuthorService {
         return getDate.stream().map(author -> authorConverter.toDTO(author)).collect(Collectors.toList());
     }
 
-    public List<AuthorDto> searchForFullName(String query){
+    public List<AuthorBaseDTO> searchForFullName(String query){
         List<Author> authors = authorRepository.searchAuthor(query);
-        return authors.stream().map(author -> authorConverter.toDTO(author)).collect(Collectors.toList());
+        return authors.stream().map(author -> authorConverter.toDtoAuthorBase(author)).collect(Collectors.toList());
     }
    
 }
