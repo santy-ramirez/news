@@ -1,13 +1,12 @@
 package com.informatorio.news.service;
 
+import com.informatorio.news.converter.ArticleConverter;
 import com.informatorio.news.converter.AuthorConverter;
 import com.informatorio.news.domain.Author;
-import com.informatorio.news.dto.AuthorDTO;
+import com.informatorio.news.dto.author.AuthorBaseDTO;
+import com.informatorio.news.dto.author.AuthorDto;
 import com.informatorio.news.repository.AuthorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -23,16 +22,21 @@ public class AuthorService {
     @Autowired
     private final AuthorConverter authorConverter;
 
-    public AuthorService(AuthorRepository authorRepository, AuthorConverter authorConverter) {
+
+    @Autowired
+    private final ArticleConverter articleConverter;
+
+    public AuthorService(AuthorRepository authorRepository, AuthorConverter authorConverter,ArticleConverter articleConverter) {
         this.authorRepository = authorRepository;
         this.authorConverter = authorConverter;
+        this.articleConverter = articleConverter;
     }
 
-    public AuthorDTO createAuthor( Author author){
+    public AuthorBaseDTO createAuthor(Author author){
         Author authors = authorRepository.save(author);
-        return authorConverter.toDTO(authors);
+        return authorConverter.todtoauthor(authors);
     }
-    public AuthorDTO actualizarAuthor(Integer id ,Author author){
+    public AuthorDto actualizarAuthor(Integer id ,Author author){
         Author authorSelect =  authorRepository.findById(id).orElse(null);
         authorSelect.setId(id);
         authorSelect.setName(author.getName());
@@ -45,19 +49,20 @@ public class AuthorService {
         authorRepository.deleteById(id);
     }
 
-    public List<AuthorDTO> traerTodosLosAuhores(){
+    public List<AuthorDto> traerTodosLosAuhores(){
         List<Author> author= authorRepository.findAll();
-       List<AuthorDTO> authorDTOS = author.stream().map(author1 -> authorConverter.toDTO(author1)).collect(Collectors.toList());
-       return  authorDTOS;
+         List<AuthorDto>  authorDTOS = author.stream().map(author1 -> authorConverter.toDTO(author1)).collect(Collectors.toList());
+         return authorDTOS;
     }
 
-    public List<AuthorDTO> searchForDate(LocalDate localDate){
+    public List<AuthorDto> searchForDate(LocalDate localDate){
         List <Author> getDate = authorRepository.findByCreateAt(localDate);
         return getDate.stream().map(author -> authorConverter.toDTO(author)).collect(Collectors.toList());
     }
 
-    public List<AuthorDTO> searchForFullName(String query){
+    public List<AuthorDto> searchForFullName(String query){
         List<Author> authors = authorRepository.searchAuthor(query);
         return authors.stream().map(author -> authorConverter.toDTO(author)).collect(Collectors.toList());
     }
+   
 }

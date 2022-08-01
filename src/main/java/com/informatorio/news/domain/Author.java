@@ -24,13 +24,21 @@ public class Author {
     private List<Article> articles = new ArrayList<>();
 
 
-    public Author(Integer id, String name, String lastname,LocalDate createAt, List articles) {
+    public Author(Integer id, String name, String lastname,LocalDate createAt, List<Article> articles) {
         this.id = id;
         this.name = name;
         this.lastname = lastname;
         this.createAt = createAt;
         this.articles = articles;
         this.fullName = name + lastname;
+
+    }
+    public Author(Integer id, String name, String lastname,LocalDate createAt) {
+        this.id = id;
+        this.name = name;
+        this.lastname = lastname;
+        this.createAt = createAt;
+
 
     }
 
@@ -70,10 +78,14 @@ public class Author {
     }
 
 
+    public List<Article> getArticles() {
+        return articles;
+    }
 
     public void setArticles(List<Article> articles) {
         this.articles = articles;
     }
+
 
     public String getFullName() {
         return fullName;
@@ -82,4 +94,5 @@ public class Author {
     public void setFullName(String fullName) {
         this.fullName = fullName;
     }
+
 }

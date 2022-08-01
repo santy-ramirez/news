@@ -1,32 +1,20 @@
-package com.informatorio.news.dto;
-
+package com.informatorio.news.dto.author;
 
 import java.time.LocalDate;
 
-
-public class AuthorDTO {
-
+public class AuthorBaseDTO {
     private String name;
     private  String lastname;
     private LocalDate createAt;
-    private String fullName;
 
-
-
-
-    public AuthorDTO(String name, String lastname, LocalDate createAt) {
+    public AuthorBaseDTO(String name, String lastname, LocalDate createAt) {
         this.name = name;
         this.lastname = lastname;
         this.createAt = createAt;
-        this.fullName = name + lastname;
-
     }
 
-    public AuthorDTO() {
+    public AuthorBaseDTO() {
     }
-
-
-
 
     public String getName() {
         return name;
@@ -51,14 +39,4 @@ public class AuthorDTO {
     public void setCreateAt(LocalDate createAt) {
         this.createAt = createAt;
     }
-
-    public String getFullName() {
-        return fullName;
-    }
-
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
-    }
-
-
 }

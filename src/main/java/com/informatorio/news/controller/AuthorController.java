@@ -2,7 +2,8 @@ package com.informatorio.news.controller;
 
 
 import com.informatorio.news.domain.Author;
-import com.informatorio.news.dto.AuthorDTO;
+import com.informatorio.news.dto.author.AuthorBaseDTO;
+import com.informatorio.news.dto.author.AuthorDto;
 import com.informatorio.news.service.AuthorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -28,15 +29,15 @@ public class AuthorController {
 
 
     @PostMapping()
-    public ResponseEntity<AuthorDTO>  createAuthor1(@RequestBody Author author){
-        AuthorDTO authors = authorService.createAuthor(author);
+    public ResponseEntity<AuthorBaseDTO>  createAuthor1(@RequestBody Author author){
+        AuthorBaseDTO authors = authorService.createAuthor(author);
         return new ResponseEntity(authors, HttpStatus.CREATED);
     }
 
     @PutMapping("{id}")
-    public ResponseEntity<AuthorDTO> updateAuthor( @PathVariable Integer id,@RequestBody Author author){
-        AuthorDTO authorDTO = authorService.actualizarAuthor(id,author);
-        return new ResponseEntity<AuthorDTO>(authorDTO,HttpStatus.OK);
+    public ResponseEntity<AuthorDto> updateAuthor( @PathVariable Integer id,@RequestBody Author author){
+        AuthorDto authorDTO = authorService.actualizarAuthor(id,author);
+        return new ResponseEntity<AuthorDto>(authorDTO,HttpStatus.OK);
 
     }
     @DeleteMapping("/{id}")
@@ -45,21 +46,21 @@ public class AuthorController {
     return new ResponseEntity<String>(HttpStatus.NO_CONTENT);
     }
     @GetMapping()
-    public ResponseEntity<List<AuthorDTO>> getAll(){
-      List<AuthorDTO> authores = authorService.traerTodosLosAuhores();
-       return new ResponseEntity<List<AuthorDTO>>(authores,HttpStatus.OK);
+    public ResponseEntity< List<AuthorDto>> getAll(){
+       List<AuthorDto> authores = authorService.traerTodosLosAuhores();
+       return new ResponseEntity<List<AuthorDto>>(authores,HttpStatus.OK);
 
     }
 
     @GetMapping("/alldate")
-    public List<AuthorDTO> getForDate(@RequestParam("localDate")
+    public List<AuthorDto> getForDate(@RequestParam("localDate")
                                        @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate localDate){
-       List <AuthorDTO> getDate = authorService.searchForDate(localDate);
+       List <AuthorDto> getDate = authorService.searchForDate(localDate);
         return  getDate;
     }
     @GetMapping("/test")
-    public List<AuthorDTO> getAuthor(@RequestParam String query){
-        List<AuthorDTO> authors = authorService.searchForFullName(query);
+    public List<AuthorDto> getAuthor(@RequestParam String query){
+        List<AuthorDto> authors = authorService.searchForFullName(query);
         return authors;
     }
 
