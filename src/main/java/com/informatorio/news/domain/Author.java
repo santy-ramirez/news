@@ -26,13 +26,14 @@ public class Author {
     private List<Article> articles = new ArrayList<>();
 
 
-    public Author(Integer id, String name, String lastname,LocalDate createAt, List<Article> articles) {
+    public Author(Integer id, String name, String lastname,String fullName, LocalDate createAt, List<Article> articles) {
         this.id = id;
         this.name = name;
         this.lastname = lastname;
+        this.fullName = fullName;
         this.createAt = createAt;
         this.articles = articles;
-        this.fullName = name + lastname;
+
 
     }
     public Author(Integer id, String name, String lastname,LocalDate createAt) {

@@ -1,16 +1,16 @@
 package com.informatorio.news.dto.author;
 
-import com.informatorio.news.dto.article.ArticleBaseDto;
+import com.informatorio.news.dto.article.ArticleBaseDTO;
 
 import java.time.LocalDate;
 import java.util.List;
 
-public class AuthorDto extends AuthorBaseDTO {
+public class AuthorDTO extends AuthorBaseDTO {
     private String fullName;
 
-   private List<ArticleBaseDto> articlesdto;
+   private List<ArticleBaseDTO> articlesdto;
 
-    public AuthorDto(String name, String lastname, LocalDate createAt, String fullName, List<ArticleBaseDto> articleBaseDtos) {
+    public AuthorDTO(String name, String lastname, LocalDate createAt,String fullName, List<ArticleBaseDTO> articleBaseDtos) {
         this.setName(name);
         this.setLastname(lastname);
         this.setCreateAt(createAt);
@@ -18,7 +18,7 @@ public class AuthorDto extends AuthorBaseDTO {
         this.articlesdto = articleBaseDtos;
     }
 
-    public AuthorDto(String fullName, List<ArticleBaseDto> articlesdto) {
+    public AuthorDTO(String fullName, List<ArticleBaseDTO> articlesdto) {
         this.fullName = fullName;
         this.articlesdto = articlesdto;
     }
@@ -31,11 +31,11 @@ public class AuthorDto extends AuthorBaseDTO {
         this.fullName = fullName;
     }
 
-    public List<ArticleBaseDto> getArticlesdto() {
+    public List<ArticleBaseDTO> getArticlesdto() {
         return articlesdto;
     }
 
-    public void setArticlesdto(List<ArticleBaseDto> articlesdto) {
+    public void setArticlesdto(List<ArticleBaseDTO> articlesdto) {
         this.articlesdto = articlesdto;
     }
 }

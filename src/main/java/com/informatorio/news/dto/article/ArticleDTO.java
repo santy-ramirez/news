@@ -3,11 +3,11 @@ package com.informatorio.news.dto.article;
 import com.informatorio.news.dto.author.AuthorBaseDTO;
 import com.informatorio.news.dto.source.SourceBaseDTO;
 
-public class ArticleDto extends ArticleBaseDto{
+public class ArticleDTO extends ArticleBaseDTO {
     private AuthorBaseDTO author;
     private SourceBaseDTO source;
 
-    public ArticleDto(Integer id, String title, String description,AuthorBaseDTO author,SourceBaseDTO source) {
+    public ArticleDTO(Integer id, String title, String description, AuthorBaseDTO author, SourceBaseDTO source) {
 
         this.setId(id);
         this.setTitle(title);
@@ -16,7 +16,7 @@ public class ArticleDto extends ArticleBaseDto{
         this.source = source;
     }
 
-    public ArticleDto() {
+    public ArticleDTO() {
     }
 
     public AuthorBaseDTO getAuthor() {

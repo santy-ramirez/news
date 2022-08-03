@@ -4,9 +4,9 @@ import com.informatorio.news.converter.ArticleConverter;
 import com.informatorio.news.converter.AuthorConverter;
 import com.informatorio.news.domain.Author;
 import com.informatorio.news.dto.author.AuthorBaseDTO;
-import com.informatorio.news.dto.author.AuthorDto;
+import com.informatorio.news.dto.author.AuthorDTO;
 import com.informatorio.news.repository.AuthorRepository;
-import com.informatorio.news.util.PageCustumer;
+import com.informatorio.news.util.PageCustumerAuthor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -40,7 +40,7 @@ public class AuthorService {
         Author authors = authorRepository.save(author);
         return authorConverter.toDtoAuthorBase(authors);
     }
-    public AuthorDto actualizarAuthor(Integer id ,Author author){
+    public AuthorDTO actualizarAuthor(Integer id , Author author){
         Author authorSelect =  authorRepository.findById(id).orElse(null);
         authorSelect.setId(id);
         authorSelect.setName(author.getName());
@@ -49,23 +49,25 @@ public class AuthorService {
         return authorConverter.toDTO(authorUpdated);
     }
 
-    public  void eliminarAuthor(Integer id){
+    public  void deleteAuthor(Integer id){
         authorRepository.deleteById(id);
     }
 
-    public PageCustumer traerTodosLosAuhores(int page){
+    public PageCustumerAuthor getAllAuhores(int page){
     Pageable pageable = PageRequest.of(page, 3);
         Page<Author> page1 = authorRepository.findAll(pageable);
-    PageCustumer pageCustumer = new PageCustumer();
+
+    PageCustumerAuthor pageCustumer = new PageCustumerAuthor();
         pageCustumer.setPage(page1.getSize());
         pageCustumer.setSize(page1.getTotalPages());
+        pageCustumer.setTotalResult(page1.getTotalElements());
     pageCustumer.setContent(page1.getContent().stream().map(author -> authorConverter.toDTO(author)).collect(Collectors.toList()));
 
 
          return pageCustumer;
     }
 
-    public List<AuthorDto> searchForDate(LocalDate localDate){
+    public List<AuthorDTO> searchForDate(LocalDate localDate){
         List <Author> getDate = authorRepository.findByCreateAt(localDate);
         return getDate.stream().map(author -> authorConverter.toDTO(author)).collect(Collectors.toList());
     }

@@ -1,17 +1,17 @@
 package com.informatorio.news.dto.article;
 
-public class ArticleBaseDto {
+public class ArticleBaseDTO {
     Integer id;
     private String title;
     private String description;
 
-    public ArticleBaseDto(Integer id, String title, String description) {
+    public ArticleBaseDTO(Integer id, String title, String description) {
         this.id = id;
         this.title = title;
         this.description = description;
     }
 
-    public ArticleBaseDto() {
+    public ArticleBaseDTO() {
     }
 
     public Integer getId() {

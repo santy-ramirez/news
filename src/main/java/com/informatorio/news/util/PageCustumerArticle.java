@@ -1,23 +1,22 @@
 package com.informatorio.news.util;
 
-import com.informatorio.news.dto.author.AuthorDto;
-import org.springframework.data.domain.Pageable;
+import com.informatorio.news.dto.article.ArticleDTO;
+
 
 import java.util.List;
 
-public class PageCustumer  {
+public class PageCustumerArticle {
     private int page;
     private int size;
-    private List<AuthorDto> content;
+    private Long totalResult;
+    private List<ArticleDTO> content;
 
 
-
-
-    public List<AuthorDto> getContent() {
+    public List<ArticleDTO> getContent() {
         return content;
     }
 
-    public void setContent(List<AuthorDto> content) {
+    public void setContent(List<ArticleDTO> content) {
         this.content = content;
     }
 
@@ -37,6 +36,13 @@ public class PageCustumer  {
         this.size = size;
     }
 
-    public PageCustumer() {
+
+
+    public Long getTotalResult() {
+        return totalResult;
+    }
+
+    public void setTotalResult(Long totalResult) {
+        this.totalResult = totalResult;
     }
 }

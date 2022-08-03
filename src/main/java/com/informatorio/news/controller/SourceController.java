@@ -4,10 +4,9 @@ import com.informatorio.news.domain.Source;
 import com.informatorio.news.dto.source.SourceBaseDTO;
 import com.informatorio.news.service.SourceService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/source")
@@ -22,6 +21,25 @@ public class SourceController {
 
     @PostMapping
     public SourceBaseDTO createSource(@RequestBody  Source source){
-        return sourceService.crearSource(source);
+        return sourceService.createSource(source);
     }
+
+    @PutMapping("{id}")
+    public SourceBaseDTO updatesSources(@PathVariable Integer id,Source source){
+        SourceBaseDTO sourceUpdate = sourceService.updateSource(id,source);
+        return sourceUpdate;
+    }
+
+
+    @DeleteMapping("{id}")
+    public String deleteSources(@PathVariable Integer id){
+        sourceService.deleteSource(id);
+        return "deleted source number "+id;
+    }
+    @GetMapping()
+    public List<SourceBaseDTO> getAllSources(){
+        List<SourceBaseDTO> sourceBaseDTOS = sourceService.getAllSource();
+        return sourceBaseDTOS;
+    }
+
 }

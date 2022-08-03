@@ -1,66 +1,58 @@
 package com.informatorio.news.controller;
 
-import com.informatorio.news.converter.ArticleConverter;
 import com.informatorio.news.domain.Article;
-import com.informatorio.news.dto.article.ArticleBaseDto;
-import com.informatorio.news.dto.article.ArticleDto;
-import com.informatorio.news.repository.ArticleRepository;
+import com.informatorio.news.dto.article.ArticleBaseDTO;
+import com.informatorio.news.service.ArticleService;
+import com.informatorio.news.util.PageCustumerArticle;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+
 import java.util.List;
-import java.util.stream.Collectors;
+
 
 @RestController
 @RequestMapping("/article")
 public class ArticleController {
 
+
+
+    private ArticleService articleService;
     @Autowired
-    private ArticleRepository articleRepository;
-    @Autowired
-    private ArticleConverter articleConverter;
-
-    public ArticleController(ArticleRepository articleRepository,  ArticleConverter articleConverter) {
-        this.articleRepository = articleRepository;
-        this.articleConverter = articleConverter;
-
-
+    public ArticleController(ArticleService articleService) {
+        this.articleService = articleService;
     }
 
-
-
     @PostMapping()
-    public ResponseEntity<ArticleBaseDto>  createUser(@RequestBody  Article article){
-        Article article1 = articleRepository.save(article);
-        return new ResponseEntity<ArticleBaseDto>(articleConverter.toDto(article1), HttpStatus.CREATED) ;
+    public ResponseEntity<ArticleBaseDTO>  createArticles(@RequestBody  Article article){
+        ArticleBaseDTO articleBaseDTO = articleService.CreateArticle(article);
+        return new ResponseEntity<ArticleBaseDTO>(articleBaseDTO, HttpStatus.CREATED) ;
     }
 
     @GetMapping()
-    public List <ArticleDto> getAll(){
-        List<Article> articles = articleRepository.findAll();
-      return articles.stream().map(article -> articleConverter.toDto(article)).collect(Collectors.toList());
+    public ResponseEntity<PageCustumerArticle>  getAllArticles(@RequestParam(required = false,defaultValue = "0") int page){
+        PageCustumerArticle pageCustumer = articleService.getAllArticle(page);
+      return new ResponseEntity<>(pageCustumer,HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
-     public void deleteArticle(@PathVariable Integer id){
-        articleRepository.deleteById(id);
+     public ResponseEntity<String> deleteArticles(@PathVariable Integer id){
+        articleService.deleteArticle(id);
+        String confirmationMessage = "deleted author with id number:" + id;
+        return new ResponseEntity<>(confirmationMessage,HttpStatus.NOT_FOUND);
   }
 
     @PutMapping("{id}")
-    public ResponseEntity<ArticleBaseDto> updateArticle( @PathVariable Integer id,@RequestBody Article article){
-        Article articleSelect =  articleRepository.findById(id).orElse(null);
-        articleSelect.setId(id);
-        articleSelect.setTitle(article.getTitle());
-        articleSelect.setDescription(article.getDescription());
-        Article articleUpdated = articleRepository.save(articleSelect);
-        return new ResponseEntity<ArticleBaseDto>(articleConverter.toDto(articleUpdated),HttpStatus.OK);
+    public ResponseEntity<ArticleBaseDTO> updateArticle(@PathVariable Integer id, @RequestBody Article article){
+    ArticleBaseDTO articleBaseDTO =  articleService.updateArticle(id,article);
+        return new ResponseEntity<ArticleBaseDTO>(articleBaseDTO,HttpStatus.CREATED);
 
     }
-    @GetMapping("/test")
-    public List<ArticleBaseDto> getArticles(@RequestParam String query){
-        List<Article> articles = articleRepository.searchArticle(query);
-        return articles.stream().map(article -> articleConverter.toDtoArticleBase(article)).collect(Collectors.toList());
+    @GetMapping("search")
+    public ResponseEntity <List<ArticleBaseDTO>> searchArticles(@RequestParam()  String query){
+       List<ArticleBaseDTO> articleBaseDTOS = articleService.searchArticle(query);
+        return new ResponseEntity<>(articleBaseDTOS,HttpStatus.OK);
     }
 }

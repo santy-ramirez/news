@@ -3,9 +3,9 @@ package com.informatorio.news.controller;
 
 import com.informatorio.news.domain.Author;
 import com.informatorio.news.dto.author.AuthorBaseDTO;
-import com.informatorio.news.dto.author.AuthorDto;
+import com.informatorio.news.dto.author.AuthorDTO;
 import com.informatorio.news.service.AuthorService;
-import com.informatorio.news.util.PageCustumer;
+import com.informatorio.news.util.PageCustumerAuthor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
@@ -37,30 +37,30 @@ public class AuthorController {
     }
 
     @PutMapping("{id}")
-    public ResponseEntity<AuthorDto> updateAuthor( @PathVariable() Integer id,@RequestBody Author author){
-        AuthorDto authorDTO = authorService.actualizarAuthor(id,author);
-        return new ResponseEntity<AuthorDto>(authorDTO,HttpStatus.OK);
+    public ResponseEntity<AuthorDTO> updateAuthor(@PathVariable() Integer id, @RequestBody Author author){
+        AuthorDTO authorDTO = authorService.actualizarAuthor(id,author);
+        return new ResponseEntity<AuthorDTO>(authorDTO,HttpStatus.OK);
 
     }
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteAuthor( @PathVariable Integer id){
-      authorService.eliminarAuthor(id);
+      authorService.deleteAuthor(id);
     return new ResponseEntity<String>(HttpStatus.NO_CONTENT);
     }
     @GetMapping()
-    public ResponseEntity<PageCustumer> getAll(@RequestParam(required = false, defaultValue = "0") int page){
-        PageCustumer authores = authorService.traerTodosLosAuhores(page);
-       return new ResponseEntity<PageCustumer>(authores,HttpStatus.OK);
+    public ResponseEntity<PageCustumerAuthor> getAll(@RequestParam(required = false, defaultValue = "0") int page){
+        PageCustumerAuthor authores = authorService.getAllAuhores(page);
+       return new ResponseEntity<PageCustumerAuthor>(authores,HttpStatus.OK);
 
     }
 
-    @GetMapping("/alldate")
-    public List<AuthorDto> getForDate(@RequestParam("localDate")
+    @GetMapping("/filter")
+    public List<AuthorDTO> getForDate(@RequestParam("localDate")
                                        @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate localDate){
-       List <AuthorDto> getDate = authorService.searchForDate(localDate);
+       List <AuthorDTO> getDate = authorService.searchForDate(localDate);
         return  getDate;
     }
-    @GetMapping("/test")
+    @GetMapping("/search")
     public List<AuthorBaseDTO> getAuthor(@RequestParam String query){
         List<AuthorBaseDTO> authors = authorService.searchForFullName(query);
         return authors;
