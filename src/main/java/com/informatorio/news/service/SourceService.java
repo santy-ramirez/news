@@ -53,4 +53,8 @@ public class SourceService {
         List<SourceDTO> sourceDTOS = sources.stream().map(source -> sourceConverter.toDto(source)).collect(Collectors.toList());
         return sourceDTOS;
     }
+    public List<SourceBaseDTO> searchForName(String q){
+        List<Source> sources = sourceRepository.findByName(q);
+        return sources.stream().map(source -> sourceConverter.toSourceBaseDTO(source)).collect(Collectors.toList());
+    }
 }
