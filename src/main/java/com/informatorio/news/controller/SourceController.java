@@ -2,6 +2,7 @@ package com.informatorio.news.controller;
 
 import com.informatorio.news.domain.Source;
 import com.informatorio.news.dto.source.SourceBaseDTO;
+import com.informatorio.news.dto.source.SourceDTO;
 import com.informatorio.news.service.SourceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -25,7 +26,7 @@ public class SourceController {
     }
 
     @PutMapping("{id}")
-    public  SourceBaseDTO updatesSources(@PathVariable Integer id,Source source){
+    public  SourceBaseDTO updatesSources(@PathVariable Integer id,@RequestBody Source source){
         SourceBaseDTO sourceUpdate = sourceService.updateSource(id,source);
         return sourceUpdate;
     }
@@ -40,6 +41,11 @@ public class SourceController {
     public List<SourceBaseDTO> getAllSources(){
         List<SourceBaseDTO> sourceBaseDTOS = sourceService.getAllSource();
         return sourceBaseDTOS;
+    }
+    @GetMapping("all")
+    public List<SourceDTO> getAllSourceWithArticles(){
+        List<SourceDTO> sourceDTOS = sourceService.getSourceWithArticle();
+        return  sourceDTOS;
     }
 
 }

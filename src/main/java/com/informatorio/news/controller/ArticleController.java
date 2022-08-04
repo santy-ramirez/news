@@ -1,5 +1,6 @@
 package com.informatorio.news.controller;
 
+import com.informatorio.news.config.CustumExcepcionHandler;
 import com.informatorio.news.domain.Article;
 import com.informatorio.news.dto.article.ArticleBaseDTO;
 import com.informatorio.news.service.ArticleService;
@@ -7,13 +8,16 @@ import com.informatorio.news.util.PageCustumerArticle;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 
 import javax.validation.Valid;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.Size;
 import java.util.List;
 
-
+@Validated
 @RestController
 @RequestMapping("/article")
 public class ArticleController {
@@ -52,7 +56,7 @@ public class ArticleController {
 
     }
     @GetMapping("search")
-    public ResponseEntity <List<ArticleBaseDTO>> searchArticles(@RequestParam()  String query){
+    public ResponseEntity <List<ArticleBaseDTO>> searchArticles( @RequestParam(name="query") @Valid @Size( min = 3, max=10 )  String query)  {
        List<ArticleBaseDTO> articleBaseDTOS = articleService.searchArticle(query);
         return new ResponseEntity<>(articleBaseDTOS,HttpStatus.OK);
     }

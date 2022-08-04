@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 @Component
 public class SourceConverter {
 
-    public  SourceDTO toDto2(Source source){
+    public  SourceDTO toDto(Source source){
         return new SourceDTO(source.getId(),source.getName(),source.getCode(),source.getCreateAt(),toListArticleDto(source.getArticles()));
     }
 

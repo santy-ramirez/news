@@ -1,7 +1,7 @@
 package com.informatorio.news.dto.source;
 
 import java.time.LocalDate;
-import java.time.LocalDate;
+
 public class SourceBaseDTO {
 
 
