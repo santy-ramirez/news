@@ -19,13 +19,13 @@ public class ArticleConverter {
 
 
     public ArticleDTO toDto(Article article){
-      return new ArticleDTO(article.getId(),article.getTitle(), article.getDescription(),todtoauthor(article.getAuthor()),todsource(article.getSource()));
+      return new ArticleDTO(article.getId(),article.getTitle(), article.getDescription(),article.getUrl(),article.getUrlToImage(),article.getContent(),article.getPublishedAt(),todtoauthor(article.getAuthor()),todsource(article.getSource()));
 
 
     }
 
 public ArticleBaseDTO toDtoArticleBase(Article article){
-        return new ArticleBaseDTO(article.getId(), article.getTitle(), article.getDescription());
+        return new ArticleBaseDTO(article.getId(), article.getTitle(), article.getDescription(),article.getUrl(),article.getUrlToImage(),article.getContent(),article.getPublishedAt());
 }
 
     private AuthorBaseDTO todtoauthor(Author author){

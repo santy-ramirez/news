@@ -27,17 +27,17 @@ public class AuthorConverter {
 
     public AuthorDTO toDTO (Author author){
 
-       return new AuthorDTO( author.getName(), author.getLastname(), author.getCreateAt(),author.getFullName(),toListArticle2( author.getArticles()));
+       return new AuthorDTO( author.getName(), author.getLastname(), author.getCreateAt(),author.getFullName(),toListArticleDto( author.getArticles()));
     }
 
-    public List<ArticleBaseDTO> toListArticle2(List<Article> articles){
+    public List<ArticleBaseDTO> toListArticleDto(List<Article> articles){
 
-        List<ArticleBaseDTO> articleDTOS= articles.stream().map(article -> toConverArticleDTO(article)).collect(Collectors.toList());
+        List<ArticleBaseDTO> articleDTOS= articles.stream().map(article -> toArticleBaseDTO(article)).collect(Collectors.toList());
         return articleDTOS;
     }
 
-    private ArticleBaseDTO toConverArticleDTO(Article article){
-        return new ArticleBaseDTO(article.getId(),article.getTitle(),article.getDescription());
+    private ArticleBaseDTO toArticleBaseDTO(Article article){
+        return new ArticleBaseDTO(article.getId(),article.getTitle(),article.getDescription(),article.getUrl(),article.getUrlToImage(),article.getContent(),article.getPublishedAt());
     }
 
     public AuthorBaseDTO toDtoAuthorBase(Author author){

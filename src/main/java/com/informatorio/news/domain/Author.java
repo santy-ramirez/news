@@ -1,6 +1,7 @@
 package com.informatorio.news.domain;
 
 import javax.persistence.*;
+import javax.validation.constraints.FutureOrPresent;
 import javax.validation.constraints.NotBlank;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -11,16 +12,18 @@ import java.util.List;
 @Entity
 public class Author {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
 
 
     private Integer id;
     @NotBlank
 
     private String name;
+    @NotBlank
     private  String lastname;
 
     private String fullName ;
+   @FutureOrPresent
     private LocalDate createAt;
     @OneToMany(mappedBy = "author", cascade = CascadeType.ALL)
     private List<Article> articles = new ArrayList<>();
@@ -36,14 +39,7 @@ public class Author {
 
 
     }
-    public Author(Integer id, String name, String lastname,LocalDate createAt) {
-        this.id = id;
-        this.name = name;
-        this.lastname = lastname;
-        this.createAt = createAt;
 
-
-    }
 
     public Author() {
     }

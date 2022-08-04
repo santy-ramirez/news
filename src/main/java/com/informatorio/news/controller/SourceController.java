@@ -25,7 +25,7 @@ public class SourceController {
     }
 
     @PutMapping("{id}")
-    public SourceBaseDTO updatesSources(@PathVariable Integer id,Source source){
+    public  SourceBaseDTO updatesSources(@PathVariable Integer id,Source source){
         SourceBaseDTO sourceUpdate = sourceService.updateSource(id,source);
         return sourceUpdate;
     }

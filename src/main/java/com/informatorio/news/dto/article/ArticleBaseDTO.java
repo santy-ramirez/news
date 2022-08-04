@@ -1,17 +1,32 @@
 package com.informatorio.news.dto.article;
 
+
+import java.time.LocalDate;
+
 public class ArticleBaseDTO {
     Integer id;
     private String title;
     private String description;
+    private String url;
 
-    public ArticleBaseDTO(Integer id, String title, String description) {
+    private String urlToImage;
+
+    private String content;
+    private LocalDate publishedAt;
+
+    public ArticleBaseDTO(Integer id, String title, String description, String url, String urlToImage, String content, LocalDate publishedAt) {
+
         this.id = id;
         this.title = title;
         this.description = description;
+        this.url = url;
+        this.urlToImage = urlToImage;
+        this.content = content;
+        this.publishedAt = publishedAt;
     }
 
     public ArticleBaseDTO() {
+
     }
 
     public Integer getId() {
@@ -36,5 +51,37 @@ public class ArticleBaseDTO {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public String getUrlToImage() {
+        return urlToImage;
+    }
+
+    public void setUrlToImage(String urlToImage) {
+        this.urlToImage = urlToImage;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public LocalDate getPublishedAt() {
+        return publishedAt;
+    }
+
+    public void setPublishedAt(LocalDate publishedAt) {
+        this.publishedAt = publishedAt;
     }
 }

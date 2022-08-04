@@ -3,7 +3,6 @@ package com.informatorio.news.service;
 import com.informatorio.news.converter.SourceConverter;
 import com.informatorio.news.domain.Source;
 import com.informatorio.news.dto.source.SourceBaseDTO;
-import com.informatorio.news.dto.source.SourceDTO;
 import com.informatorio.news.repository.SourceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,16 +24,16 @@ public class SourceService {
 
     public SourceBaseDTO createSource(Source source){
        Source source1 = sourceRepository.save(source);
-        return sourceConverter.toDto(source1);
+        return sourceConverter.toSourceBaseDTO(source1);
     }
 
     public SourceBaseDTO updateSource( Integer id, Source source){
-      Source sourceSelect = sourceRepository.findById(id).orElse(source);
+      Source sourceSelect = sourceRepository.findById(id).orElse(null);
       sourceSelect.setId(source.getId());
       sourceSelect.setName(source.getName());
       sourceSelect.setCode(source.getCode());
       sourceSelect.setCreateAt(source.getCreateAt());
-      return sourceConverter.toDto(sourceSelect);
+      return sourceConverter.toSourceBaseDTO(sourceSelect);
     }
 
     public String deleteSource(Integer id){
@@ -44,7 +43,7 @@ public class SourceService {
 
     public List<SourceBaseDTO> getAllSource(){
         List<Source> sources = sourceRepository.findAll();
-        List<SourceBaseDTO> sourceBaseDTOS = sources.stream().map(source -> sourceConverter.toDto(source)).collect(Collectors.toList());
+        List<SourceBaseDTO> sourceBaseDTOS = sources.stream().map(source -> sourceConverter.toSourceBaseDTO(source)).collect(Collectors.toList());
     return sourceBaseDTOS;
     }
 }

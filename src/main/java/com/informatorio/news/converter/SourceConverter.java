@@ -13,21 +13,20 @@ import java.util.stream.Collectors;
 @Component
 public class SourceConverter {
 
-    public SourceBaseDTO toDto(Source source){
+    public  SourceDTO toDto2(Source source){
+        return new SourceDTO(source.getId(),source.getName(),source.getCode(),source.getCreateAt(),toListArticleDto(source.getArticles()));
+    }
+
+    public SourceBaseDTO toSourceBaseDTO(Source source){
         return new SourceBaseDTO(source.getId(),source.getName(),source.getCode(),source.getCreateAt());
     }
+    public List<ArticleBaseDTO> toListArticleDto(List<Article> articles){
 
-    public  SourceDTO toDto2(Source source){
-        return new SourceDTO(source.getId(),source.getName(),source.getCode(),source.getCreateAt(),toListArticle2(source.getArticles()));
-    }
-
-    public List<ArticleBaseDTO> toListArticle2(List<Article> articles){
-
-        List<ArticleBaseDTO> articleDTOS= articles.stream().map(article -> toConverArticleDTO(article)).collect(Collectors.toList());
+        List<ArticleBaseDTO> articleDTOS= articles.stream().map(article -> toArticleBaseDTO(article)).collect(Collectors.toList());
         return articleDTOS;
     }
-    private ArticleBaseDTO toConverArticleDTO(Article article){
-        return new ArticleBaseDTO(article.getId(),article.getTitle(),article.getDescription());
+    private ArticleBaseDTO toArticleBaseDTO(Article article){
+        return new ArticleBaseDTO(article.getId(),article.getTitle(),article.getDescription(),article.getUrl(),article.getUrlToImage(),article.getContent(),article.getPublishedAt());
     }
 
 }

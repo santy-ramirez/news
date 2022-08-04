@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 
+import javax.validation.Valid;
 import java.util.List;
 
 
@@ -26,7 +27,7 @@ public class ArticleController {
     }
 
     @PostMapping()
-    public ResponseEntity<ArticleBaseDTO>  createArticles(@RequestBody  Article article){
+    public ResponseEntity<ArticleBaseDTO>  createArticles(@RequestBody @Valid Article article){
         ArticleBaseDTO articleBaseDTO = articleService.CreateArticle(article);
         return new ResponseEntity<ArticleBaseDTO>(articleBaseDTO, HttpStatus.CREATED) ;
     }

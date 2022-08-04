@@ -31,7 +31,7 @@ public class ArticleService {
     //Create author
     public ArticleBaseDTO CreateArticle(Article article){
         Article articleNew = articleRepository.save(article);
-        return articleConverter.toDto(articleNew);
+        return articleConverter.toDtoArticleBase(articleNew);
     }
 
     //Get All Articles Created
