@@ -15,9 +15,9 @@ import java.util.List;
 @RequestMapping("/source")
 public class SourceController {
 
-    @Autowired
-    private SourceService sourceService;
 
+    private SourceService sourceService;
+    @Autowired
     public SourceController(SourceService sourceService) {
         this.sourceService = sourceService;
     }

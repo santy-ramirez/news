@@ -5,6 +5,7 @@ import com.informatorio.news.domain.Article;
 import com.informatorio.news.dto.article.ArticleBaseDTO;
 import com.informatorio.news.service.ArticleService;
 import com.informatorio.news.util.PageCustumerArticle;
+import org.aspectj.weaver.ast.Or;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,9 +14,10 @@ import org.springframework.web.bind.annotation.*;
 
 
 import javax.validation.Valid;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
 import java.util.List;
+
+
 
 @Validated
 @RestController
@@ -39,7 +41,9 @@ public class ArticleController {
     @GetMapping()
     public ResponseEntity<PageCustumerArticle>  getAllArticles(@RequestParam(required = false,defaultValue = "0") int page){
         PageCustumerArticle pageCustumer = articleService.getAllArticle(page);
-      return new ResponseEntity<>(pageCustumer,HttpStatus.OK);
+
+      return new ResponseEntity<>(pageCustumer   ,HttpStatus.OK);
+
     }
 
     @DeleteMapping("/{id}")

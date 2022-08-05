@@ -8,19 +8,17 @@ import java.util.List;
 public class AuthorDTO extends AuthorBaseDTO {
     private String fullName;
 
-   private List<ArticleBaseDTO> articlesdto;
+   private List<ArticleBaseDTO> articles;
 
     public AuthorDTO(String name, String lastname, LocalDate createAt,String fullName, List<ArticleBaseDTO> articleBaseDtos) {
-        this.setName(name);
-        this.setLastname(lastname);
-        this.setCreateAt(createAt);
-        this.fullName= fullName;
-        this.articlesdto = articleBaseDtos;
+        super(name,lastname,createAt);
+        this.fullName =fullName;
+        this.articles = articleBaseDtos;
     }
 
     public AuthorDTO(String fullName, List<ArticleBaseDTO> articlesdto) {
         this.fullName = fullName;
-        this.articlesdto = articlesdto;
+        this.articles = articlesdto;
     }
 
     public String getFullName() {
@@ -31,11 +29,11 @@ public class AuthorDTO extends AuthorBaseDTO {
         this.fullName = fullName;
     }
 
-    public List<ArticleBaseDTO> getArticlesdto() {
-        return articlesdto;
+    public List<ArticleBaseDTO> getArticles() {
+        return articles;
     }
 
-    public void setArticlesdto(List<ArticleBaseDTO> articlesdto) {
-        this.articlesdto = articlesdto;
+    public void setArticles(List<ArticleBaseDTO> articles) {
+        this.articles = articles;
     }
 }

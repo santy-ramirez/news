@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,11 +18,11 @@ import java.util.stream.Collectors;
 @Service
 public class ArticleService {
 
-    @Autowired
-    private ArticleRepository articleRepository;
-    @Autowired
-    private ArticleConverter articleConverter;
 
+    private ArticleRepository articleRepository;
+
+    private ArticleConverter articleConverter;
+    @Autowired
     public ArticleService(ArticleRepository articleRepository,  ArticleConverter articleConverter) {
         this.articleRepository = articleRepository;
         this.articleConverter = articleConverter;
@@ -40,10 +41,11 @@ public class ArticleService {
         Page<Article> page1 =  articleRepository.findAll(pageable);
 
         PageCustumerArticle pageCustumer = new PageCustumerArticle();
+        pageCustumer.setStatus(HttpStatus.OK);
         pageCustumer.setPage(page1.getSize());
         pageCustumer.setSize(page1.getTotalPages());
         pageCustumer.setTotalResult(page1.getTotalElements());
-        pageCustumer.setContent(page1.getContent().stream().map(article -> articleConverter.toDto(article)).collect(Collectors.toList()));
+        pageCustumer.setContent( page1.getContent().stream().map(article -> articleConverter.toDto(article)).collect(Collectors.toList()));
 
         return  pageCustumer;
     }

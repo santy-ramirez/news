@@ -13,11 +13,11 @@ import java.util.stream.Collectors;
 
 @Service
 public class SourceService {
-    @Autowired
+ 
     private SourceRepository sourceRepository;
-    @Autowired
-    private SourceConverter sourceConverter;
 
+    private SourceConverter sourceConverter;
+    @Autowired
     public SourceService(SourceRepository sourceRepository,SourceConverter sourceConverter) {
         this.sourceRepository = sourceRepository;
         this.sourceConverter = sourceConverter;

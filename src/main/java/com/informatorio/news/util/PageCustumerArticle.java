@@ -1,16 +1,25 @@
 package com.informatorio.news.util;
 
 import com.informatorio.news.dto.article.ArticleDTO;
+import org.springframework.http.HttpStatus;
 
 
 import java.util.List;
 
 public class PageCustumerArticle {
+    private HttpStatus status;
     private int page;
     private int size;
     private Long totalResult;
     private List<ArticleDTO> content;
 
+    public HttpStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(HttpStatus status) {
+        this.status = status;
+    }
 
     public List<ArticleDTO> getContent() {
         return content;

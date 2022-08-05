@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -21,14 +22,15 @@ import java.util.stream.Collectors;
 @Service
 public class AuthorService {
 
-    @Autowired
+
     private final AuthorRepository authorRepository;
-    @Autowired
+
     private final AuthorConverter authorConverter;
 
 
-    @Autowired
+
     private final ArticleConverter articleConverter;
+    @Autowired
 
     public AuthorService(AuthorRepository authorRepository, AuthorConverter authorConverter,ArticleConverter articleConverter) {
         this.authorRepository = authorRepository;
@@ -57,7 +59,9 @@ public class AuthorService {
     Pageable pageable = PageRequest.of(page, 3);
         Page<Author> page1 = authorRepository.findAll(pageable);
 
+
     PageCustumerAuthor pageCustumer = new PageCustumerAuthor();
+        pageCustumer.setStatus(HttpStatus.OK);
         pageCustumer.setPage(page1.getSize());
         pageCustumer.setSize(page1.getTotalPages());
         pageCustumer.setTotalResult(page1.getTotalElements());
