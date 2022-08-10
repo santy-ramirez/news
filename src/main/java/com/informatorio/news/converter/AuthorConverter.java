@@ -16,13 +16,9 @@ import java.util.stream.Collectors;
 @Component
 public class AuthorConverter {
 
-    @Autowired
-    private  SourceConverter sourceConverter;
 
-    public AuthorConverter(SourceConverter sourceConverter) {
 
-        this.sourceConverter = sourceConverter;
-    }
+
 
 
     public AuthorDTO toDTO (Author author){
@@ -37,7 +33,7 @@ public class AuthorConverter {
     }
 
     private ArticleBaseDTO toArticleBaseDTO(Article article){
-        return new ArticleBaseDTO(article.getId(),article.getTitle(),article.getDescription(),article.getUrl(),article.getUrlToImage(),article.getContent(),article.getPublishedAt());
+        return new ArticleBaseDTO(article.getId(),article.getTitle(),article.getDescription(),article.getUrl(),article.getUrlToImage(),article.getContent(),article.getPublishedAt(),article.getPublished());
     }
 
     public AuthorBaseDTO toDtoAuthorBase(Author author){

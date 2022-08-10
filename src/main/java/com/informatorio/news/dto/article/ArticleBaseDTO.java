@@ -13,8 +13,9 @@ public class ArticleBaseDTO {
 
     private String content;
     private LocalDate publishedAt;
+    private Boolean published;
 
-    public ArticleBaseDTO(Integer id, String title, String description, String url, String urlToImage, String content, LocalDate publishedAt) {
+    public ArticleBaseDTO(Integer id, String title, String description, String url, String urlToImage, String content, LocalDate publishedAt,Boolean published) {
 
         this.id = id;
         this.title = title;
@@ -23,6 +24,7 @@ public class ArticleBaseDTO {
         this.urlToImage = urlToImage;
         this.content = content;
         this.publishedAt = publishedAt;
+        this.published = published;
     }
 
     public ArticleBaseDTO() {
@@ -83,5 +85,13 @@ public class ArticleBaseDTO {
 
     public void setPublishedAt(LocalDate publishedAt) {
         this.publishedAt = publishedAt;
+    }
+
+    public Boolean getPublished() {
+        return published;
+    }
+
+    public void setPublished(Boolean published) {
+        this.published = published;
     }
 }

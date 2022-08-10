@@ -38,9 +38,9 @@ public class AuthorController {
     }
 
     @PutMapping("{id}")
-    public ResponseEntity<AuthorDTO> updateAuthor(@PathVariable() Integer id, @RequestBody Author author){
-        AuthorDTO authorDTO = authorService.actualizarAuthor(id,author);
-        return new ResponseEntity<AuthorDTO>(authorDTO,HttpStatus.OK);
+    public ResponseEntity<AuthorBaseDTO> updateAuthor(@PathVariable() Integer id, @RequestBody Author author){
+        AuthorBaseDTO authorBaseDTO = authorService.updateAuthor(id,author);
+        return new ResponseEntity<AuthorBaseDTO>(authorBaseDTO,HttpStatus.OK);
 
     }
     @DeleteMapping("/{id}")
@@ -50,7 +50,7 @@ public class AuthorController {
     }
     @GetMapping()
     public ResponseEntity<PageCustumerAuthor> getAll(@RequestParam(required = false, defaultValue = "0") int page){
-        PageCustumerAuthor authores = authorService.getAllAuhores(page);
+        PageCustumerAuthor authores = authorService.getAllAuthor(page);
        return new ResponseEntity<PageCustumerAuthor>(authores,HttpStatus.OK);
 
     }
@@ -62,8 +62,8 @@ public class AuthorController {
         return  getDate;
     }
     @GetMapping("/search")
-    public List<AuthorBaseDTO> getAuthor(@RequestParam String query){
-        List<AuthorBaseDTO> authors = authorService.searchForFullName(query);
+    public List<AuthorDTO> getAuthor(@RequestParam String query){
+        List<AuthorDTO> authors = authorService.searchForFullName(query);
         return authors;
     }
 

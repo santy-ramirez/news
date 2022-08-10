@@ -9,9 +9,9 @@ public class ArticleDTO extends ArticleBaseDTO {
     private AuthorBaseDTO author;
     private SourceBaseDTO source;
 
-    public ArticleDTO(Integer id, String title, String description, String url, String urlToImage, String content, LocalDate publishedAt, AuthorBaseDTO author, SourceBaseDTO source) {
+    public ArticleDTO(Integer id, String title, String description, String url, String urlToImage, String content, LocalDate publishedAt, Boolean published, AuthorBaseDTO author, SourceBaseDTO source) {
 
-        super(id,title,description,url,urlToImage,content,publishedAt);
+        super(id,title,description,url,urlToImage,content,publishedAt,published);
         this.author = author;
         this.source = source;
     }

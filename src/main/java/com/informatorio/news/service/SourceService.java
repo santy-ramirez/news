@@ -43,18 +43,14 @@ public class SourceService {
         return "delete source with id number:" + id;
     }
 
-    public List<SourceBaseDTO> getAllSource(){
+    public List<SourceDTO> getAllSource(){
         List<Source> sources = sourceRepository.findAll();
-        List<SourceBaseDTO> sourceBaseDTOS = sources.stream().map(source -> sourceConverter.toSourceBaseDTO(source)).collect(Collectors.toList());
+        List<SourceDTO> sourceBaseDTOS = sources.stream().map(source -> sourceConverter.toDto(source)).collect(Collectors.toList());
     return sourceBaseDTOS;
     }
-    public List<SourceDTO> getSourceWithArticle(){
-        List<Source> sources = sourceRepository.findAll();
-        List<SourceDTO> sourceDTOS = sources.stream().map(source -> sourceConverter.toDto(source)).collect(Collectors.toList());
-        return sourceDTOS;
-    }
-    public List<SourceBaseDTO> searchForName(String q){
+
+    public List<SourceDTO> searchForName(String q){
         List<Source> sources = sourceRepository.findByName(q);
-        return sources.stream().map(source -> sourceConverter.toSourceBaseDTO(source)).collect(Collectors.toList());
+        return sources.stream().map(source -> sourceConverter.toDto(source)).collect(Collectors.toList());
     }
 }

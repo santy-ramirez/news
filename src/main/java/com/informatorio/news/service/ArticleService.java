@@ -3,6 +3,7 @@ package com.informatorio.news.service;
 import com.informatorio.news.converter.ArticleConverter;
 import com.informatorio.news.domain.Article;
 import com.informatorio.news.dto.article.ArticleBaseDTO;
+import com.informatorio.news.dto.article.ArticleDTO;
 import com.informatorio.news.repository.ArticleRepository;
 import com.informatorio.news.util.PageCustumerArticle;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -37,17 +39,18 @@ public class ArticleService {
 
     //Get All Articles Created
     public PageCustumerArticle getAllArticle(int page){
-        Pageable pageable = PageRequest.of(page, 3);
-        Page<Article> page1 =  articleRepository.findAll(pageable);
+        Pageable pageable = PageRequest.of(page,3 );
+        Page<Article> authorsPaged =  articleRepository.findAll(pageable);
 
-        PageCustumerArticle pageCustumer = new PageCustumerArticle();
-        pageCustumer.setStatus(HttpStatus.OK);
-        pageCustumer.setPage(page1.getSize());
-        pageCustumer.setSize(page1.getTotalPages());
-        pageCustumer.setTotalResult(page1.getTotalElements());
-        pageCustumer.setContent( page1.getContent().stream().map(article -> articleConverter.toDto(article)).collect(Collectors.toList()));
+         //List<Article> articles=  authorsPaged.getContent().stream().filter(article -> article.getPublished().equals(published)).collect(Collectors.toList());
+        PageCustumerArticle pageCustumerArticle = new PageCustumerArticle();
+         pageCustumerArticle.setStatus(HttpStatus.OK);
+        pageCustumerArticle.setPage( authorsPaged.getTotalPages());
+        pageCustumerArticle.setSize(authorsPaged.getSize());
+        pageCustumerArticle.setTotalResult(authorsPaged.getTotalElements());
+        pageCustumerArticle.setContent(authorsPaged.getContent().stream().map(article -> articleConverter.toDto(article)).collect(Collectors.toList()));
 
-        return  pageCustumer;
+        return  pageCustumerArticle;
     }
 
     //Delete Article
@@ -68,9 +71,16 @@ public class ArticleService {
         return articleConverter.toDto(articleUpdated);
     }
 
-    public List<ArticleBaseDTO> searchArticle(String query){
+    public List<ArticleDTO> searchArticle(String query){
         List<Article> articles = articleRepository.searchArticle(query);
-        List<ArticleBaseDTO> articleBaseDTOS = articles.stream().map(article -> articleConverter.toDtoArticleBase(article)).collect(Collectors.toList());
+        List<ArticleDTO> articleBaseDTOS = articles.stream().map(article -> articleConverter.toDto(article)).collect(Collectors.toList());
         return  articleBaseDTOS;
+    }
+
+    public List<ArticleDTO> filterPublish(Boolean published) {
+        List<Article> articles = articleRepository.findAll();
+       List<Article> articleFilter= articles.stream().filter(article -> article.getPublished().equals(published)).collect(Collectors.toList());
+    List<ArticleDTO> articleBaseDTOS  = articleFilter.stream().map(article -> articleConverter.toDto(article)).collect(Collectors.toList());
+    return articleBaseDTOS;
     }
 }

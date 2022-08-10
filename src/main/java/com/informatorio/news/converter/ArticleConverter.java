@@ -19,13 +19,13 @@ public class ArticleConverter {
 
 
     public ArticleDTO toDto(Article article){
-      return new ArticleDTO(article.getId(),article.getTitle(), article.getDescription(),article.getUrl(),article.getUrlToImage(),article.getContent(),article.getPublishedAt(), toDtoAuthorBase(article.getAuthor()), toDtoSourceBase(article.getSource()));
+      return new ArticleDTO(article.getId(),article.getTitle(), article.getDescription(),article.getUrl(),article.getUrlToImage(),article.getContent(),article.getPublishedAt(),article.getPublished(), toDtoAuthorBase(article.getAuthor()), toDtoSourceBase(article.getSource()));
 
 
     }
 
 public ArticleBaseDTO toDtoArticleBase(Article article){
-        return new ArticleBaseDTO(article.getId(), article.getTitle(), article.getDescription(),article.getUrl(),article.getUrlToImage(),article.getContent(),article.getPublishedAt());
+        return new ArticleBaseDTO(article.getId(), article.getTitle(), article.getDescription(),article.getUrl(),article.getUrlToImage(),article.getContent(),article.getPublishedAt(),article.getPublished());
 }
 
     private AuthorBaseDTO toDtoAuthorBase(Author author){
@@ -34,5 +34,6 @@ public ArticleBaseDTO toDtoArticleBase(Article article){
     private SourceBaseDTO toDtoSourceBase(Source source){
         return new SourceBaseDTO (source.getId(),source.getName(),source.getCode(),source.getCreateAt());
     }
+
 
 }

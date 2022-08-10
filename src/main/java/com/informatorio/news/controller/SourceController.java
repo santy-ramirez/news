@@ -7,10 +7,13 @@ import com.informatorio.news.service.SourceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+import javax.validation.constraints.Size;
 import java.util.List;
-
+@Validated
 @RestController
 @RequestMapping("/source")
 public class SourceController {
@@ -36,23 +39,17 @@ public class SourceController {
 
     @DeleteMapping("{id}")
     public ResponseEntity<String> deleteSources(@PathVariable Integer id){
-        sourceService.deleteSource(id);
-        return new ResponseEntity<>("deleted source number "+id,HttpStatus.NOT_FOUND) ;
+        return new ResponseEntity<>( sourceService.deleteSource(id),HttpStatus.NOT_FOUND) ;
     }
     @GetMapping()
-    public ResponseEntity<List<SourceBaseDTO>>  getAllSources(){
-        List<SourceBaseDTO> sourceBaseDTOS = sourceService.getAllSource();
-        return new ResponseEntity<>( sourceBaseDTOS, HttpStatus.OK);
-    }
-    @GetMapping("all")
-    public ResponseEntity<List<SourceDTO>> getAllSourceWithArticles(){
-        List<SourceDTO> sourceDTOS = sourceService.getSourceWithArticle();
-        return new ResponseEntity<List<SourceDTO>>(sourceDTOS,HttpStatus.OK);
+    public ResponseEntity<List<SourceDTO>>  getAllSources(){
+        List<SourceDTO> sourceDTOS = sourceService.getAllSource();
+        return new ResponseEntity<>( sourceDTOS, HttpStatus.OK);
     }
 
     @GetMapping("search")
-    public ResponseEntity <List<SourceBaseDTO>> getForNames(@RequestParam String q){
-        List<SourceBaseDTO> sourceBaseDTOS = sourceService.searchForName(q);
-        return new ResponseEntity<>(sourceBaseDTOS,HttpStatus.OK) ;
+    public ResponseEntity <List<SourceDTO>> getForNames(@RequestParam(name = "q") @Valid @Size( min = 3, max=10 ) String q){
+        List<SourceDTO> sourceDTOS = sourceService.searchForName(q);
+        return new ResponseEntity<>(sourceDTOS,HttpStatus.OK) ;
     }
 }

@@ -1,11 +1,12 @@
 package com.informatorio.news.controller;
 
-import com.informatorio.news.config.CustumExcepcionHandler;
+
 import com.informatorio.news.domain.Article;
 import com.informatorio.news.dto.article.ArticleBaseDTO;
+import com.informatorio.news.dto.article.ArticleDTO;
 import com.informatorio.news.service.ArticleService;
 import com.informatorio.news.util.PageCustumerArticle;
-import org.aspectj.weaver.ast.Or;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,6 +23,7 @@ import java.util.List;
 @Validated
 @RestController
 @RequestMapping("/article")
+@CrossOrigin("*")
 public class ArticleController {
 
 
@@ -48,9 +50,7 @@ public class ArticleController {
 
     @DeleteMapping("/{id}")
      public ResponseEntity<String> deleteArticles(@PathVariable Integer id){
-        articleService.deleteArticle(id);
-        String confirmationMessage = "deleted author with id number:" + id;
-        return new ResponseEntity<>(confirmationMessage,HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(articleService.deleteArticle(id),HttpStatus.NOT_FOUND);
   }
 
     @PutMapping("{id}")
@@ -60,8 +60,13 @@ public class ArticleController {
 
     }
     @GetMapping("search")
-    public ResponseEntity <List<ArticleBaseDTO>> searchArticles( @RequestParam(name="query") @Valid @Size( min = 3, max=10 )  String query)  {
-       List<ArticleBaseDTO> articleBaseDTOS = articleService.searchArticle(query);
+    public ResponseEntity <List<ArticleDTO>> searchArticles( @RequestParam(name="query") @Valid @Size( min = 3, max=10 )  String query)  {
+       List<ArticleDTO> articleBaseDTOS = articleService.searchArticle(query);
         return new ResponseEntity<>(articleBaseDTOS,HttpStatus.OK);
+    }
+    @GetMapping("filter")
+    public ResponseEntity<List<ArticleDTO>> filterForPublished(@RequestParam(defaultValue = "true") Boolean published){
+        List<ArticleDTO> articleBaseDTOS = articleService.filterPublish(published);
+        return  new ResponseEntity<List<ArticleDTO>>(articleBaseDTOS,HttpStatus.OK);
     }
 }

@@ -14,7 +14,7 @@ import java.util.List;
 @Repository
 public interface AuthorRepository  extends JpaRepository<Author,Integer> {
 
-  List<Author> findByCreateAt(LocalDate createAt);
+  //List<Author> findByCreateAt(LocalDate createAt);
 
  @Query("SELECT a FROM Author a WHERE " +
          "a.name LIKE CONCAT('%',:query, '%')" +

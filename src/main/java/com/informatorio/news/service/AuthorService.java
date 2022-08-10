@@ -42,43 +42,40 @@ public class AuthorService {
         Author authors = authorRepository.save(author);
         return authorConverter.toDtoAuthorBase(authors);
     }
-    public AuthorDTO actualizarAuthor(Integer id , Author author){
+    public AuthorBaseDTO updateAuthor(Integer id , Author author){
         Author authorSelect =  authorRepository.findById(id).orElse(null);
         authorSelect.setId(id);
         authorSelect.setName(author.getName());
         authorSelect.setLastname(author.getLastname());
         Author authorUpdated = authorRepository.save(authorSelect);
-        return authorConverter.toDTO(authorUpdated);
+        return authorConverter.toDtoAuthorBase(authorUpdated);
     }
 
     public  void deleteAuthor(Integer id){
         authorRepository.deleteById(id);
     }
 
-    public PageCustumerAuthor getAllAuhores(int page){
+    public PageCustumerAuthor getAllAuthor(int page){
     Pageable pageable = PageRequest.of(page, 3);
-        Page<Author> page1 = authorRepository.findAll(pageable);
-
-
-    PageCustumerAuthor pageCustumer = new PageCustumerAuthor();
-        pageCustumer.setStatus(HttpStatus.OK);
-        pageCustumer.setPage(page1.getSize());
-        pageCustumer.setSize(page1.getTotalPages());
-        pageCustumer.setTotalResult(page1.getTotalElements());
-    pageCustumer.setContent(page1.getContent().stream().map(author -> authorConverter.toDTO(author)).collect(Collectors.toList()));
-
-
-         return pageCustumer;
+    Page<Author> paged = authorRepository.findAll(pageable);
+    PageCustumerAuthor pageCustumerAuthor = new PageCustumerAuthor();
+        pageCustumerAuthor.setStatus(HttpStatus.OK);
+        pageCustumerAuthor.setPage(paged.getSize());
+        pageCustumerAuthor.setSize(paged.getTotalPages());
+        pageCustumerAuthor.setTotalResult(paged.getTotalElements());
+    pageCustumerAuthor.setContent(paged.getContent().stream().map(author -> authorConverter.toDTO(author)).collect(Collectors.toList()));
+         return pageCustumerAuthor;
     }
 
     public List<AuthorDTO> searchForDate(LocalDate localDate){
-        List <Author> getDate = authorRepository.findByCreateAt(localDate);
-        return getDate.stream().map(author -> authorConverter.toDTO(author)).collect(Collectors.toList());
+        List <Author> authors = authorRepository.findAll();
+        List<Author> authorsFilterForAfterDate = authors.stream().filter(author -> author.getCreateAt().isAfter(localDate)).collect(Collectors.toList());
+        return authorsFilterForAfterDate.stream().map(author -> authorConverter.toDTO(author)).collect(Collectors.toList());
     }
 
-    public List<AuthorBaseDTO> searchForFullName(String query){
+    public List<AuthorDTO> searchForFullName(String query){
         List<Author> authors = authorRepository.searchAuthor(query);
-        return authors.stream().map(author -> authorConverter.toDtoAuthorBase(author)).collect(Collectors.toList());
+        return authors.stream().map(author -> authorConverter.toDTO(author)).collect(Collectors.toList());
     }
    
 }

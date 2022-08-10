@@ -26,7 +26,7 @@ public class SourceConverter {
         return articleDTOS;
     }
     private ArticleBaseDTO toArticleBaseDTO(Article article){
-        return new ArticleBaseDTO(article.getId(),article.getTitle(),article.getDescription(),article.getUrl(),article.getUrlToImage(),article.getContent(),article.getPublishedAt());
+        return new ArticleBaseDTO(article.getId(),article.getTitle(),article.getDescription(),article.getUrl(),article.getUrlToImage(),article.getContent(),article.getPublishedAt(),article.getPublished());
     }
 
 }
