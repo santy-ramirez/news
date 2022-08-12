@@ -45,26 +45,19 @@ public class AuthorController {
     }
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteAuthor( @PathVariable Integer id){
-      authorService.deleteAuthor(id);
-    return new ResponseEntity<String>(HttpStatus.NO_CONTENT);
+    return new ResponseEntity<String>( authorService.deleteAuthor(id),HttpStatus.NO_CONTENT);
     }
     @GetMapping()
-    public ResponseEntity<PageCustumerAuthor> getAll(@RequestParam(required = false, defaultValue = "0") int page){
-        PageCustumerAuthor authores = authorService.getAllAuthor(page);
+    public ResponseEntity<PageCustumerAuthor> getAll(@RequestParam(required = false, defaultValue = "0") int page,
+                                                     @RequestParam(required = false ) String query,
+                                                     @RequestParam(required = false, defaultValue = "2022-08-23")
+                                                     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate createAt
+                                                     ){
+        PageCustumerAuthor authores = authorService.getAllAuthor(page,createAt,query);
        return new ResponseEntity<PageCustumerAuthor>(authores,HttpStatus.OK);
 
     }
 
-    @GetMapping("/filter")
-    public List<AuthorDTO> getForDate(@RequestParam("localDate")
-                                       @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate localDate){
-       List <AuthorDTO> getDate = authorService.searchForDate(localDate);
-        return  getDate;
-    }
-    @GetMapping("/search")
-    public List<AuthorDTO> getAuthor(@RequestParam String query){
-        List<AuthorDTO> authors = authorService.searchForFullName(query);
-        return authors;
-    }
+
 
 }

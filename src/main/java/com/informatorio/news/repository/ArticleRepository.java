@@ -12,8 +12,11 @@ import java.util.List;
 
 @Repository
 public interface ArticleRepository  extends JpaRepository<Article,Integer> {
+   // @Query(value = "SELECT * FROM Article  WHERE Article.published=published")
 
+
+    Page<Article> findAllByPublished(Boolean published, Pageable pageable);
     @Query("SELECT p FROM Article p WHERE " +
             "p.title LIKE CONCAT('%',:query, '%')")
-    List<Article> searchArticle(String query);
+    Page<Article> searchArticle(String query,Pageable pageable);
 }

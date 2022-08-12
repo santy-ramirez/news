@@ -15,7 +15,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.util.List;
 import java.util.stream.Collectors;
 
 
@@ -51,31 +50,35 @@ public class AuthorService {
         return authorConverter.toDtoAuthorBase(authorUpdated);
     }
 
-    public  void deleteAuthor(Integer id){
+    public String deleteAuthor(Integer id){
         authorRepository.deleteById(id);
+       return "deleted author con el id " + id;
     }
 
-    public PageCustumerAuthor getAllAuthor(int page){
+    public PageCustumerAuthor getAllAuthor(int page,LocalDate createAt, String query){
     Pageable pageable = PageRequest.of(page, 3);
-    Page<Author> paged = authorRepository.findAll(pageable);
-    PageCustumerAuthor pageCustumerAuthor = new PageCustumerAuthor();
-        pageCustumerAuthor.setStatus(HttpStatus.OK);
-        pageCustumerAuthor.setPage(paged.getSize());
-        pageCustumerAuthor.setSize(paged.getTotalPages());
-        pageCustumerAuthor.setTotalResult(paged.getTotalElements());
-    pageCustumerAuthor.setContent(paged.getContent().stream().map(author -> authorConverter.toDTO(author)).collect(Collectors.toList()));
+        PageCustumerAuthor pageCustumerAuthor = new PageCustumerAuthor();
+        if( query != null){
+          Page<Author> paged = authorRepository.searchAuthor(query,pageable);
+            pageCustumerAuthor.setStatus(HttpStatus.OK);
+            pageCustumerAuthor.setPage(paged.getSize());
+            pageCustumerAuthor.setSize(paged.getTotalPages());
+            pageCustumerAuthor.setTotalResult(paged.getTotalElements());
+            pageCustumerAuthor.setContent(paged.getContent().stream().map(author -> authorConverter.toDTO(author)).collect(Collectors.toList()));
+        }else{
+            Page<Author> paged = authorRepository.findAllByCreateAtAfter(createAt,pageable);
+
+
+            pageCustumerAuthor.setStatus(HttpStatus.OK);
+            pageCustumerAuthor.setPage(paged.getSize());
+            pageCustumerAuthor.setSize(paged.getTotalPages());
+            pageCustumerAuthor.setTotalResult(paged.getTotalElements());
+            pageCustumerAuthor.setContent(paged.getContent().stream().map(author -> authorConverter.toDTO(author)).collect(Collectors.toList()));
+        }
+
          return pageCustumerAuthor;
     }
 
-    public List<AuthorDTO> searchForDate(LocalDate localDate){
-        List <Author> authors = authorRepository.findAll();
-        List<Author> authorsFilterForAfterDate = authors.stream().filter(author -> author.getCreateAt().isAfter(localDate)).collect(Collectors.toList());
-        return authorsFilterForAfterDate.stream().map(author -> authorConverter.toDTO(author)).collect(Collectors.toList());
-    }
 
-    public List<AuthorDTO> searchForFullName(String query){
-        List<Author> authors = authorRepository.searchAuthor(query);
-        return authors.stream().map(author -> authorConverter.toDTO(author)).collect(Collectors.toList());
-    }
    
 }

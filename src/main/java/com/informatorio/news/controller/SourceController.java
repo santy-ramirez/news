@@ -4,6 +4,7 @@ import com.informatorio.news.domain.Source;
 import com.informatorio.news.dto.source.SourceBaseDTO;
 import com.informatorio.news.dto.source.SourceDTO;
 import com.informatorio.news.service.SourceService;
+import com.informatorio.news.util.PageCustumerSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -42,14 +43,13 @@ public class SourceController {
         return new ResponseEntity<>( sourceService.deleteSource(id),HttpStatus.NOT_FOUND) ;
     }
     @GetMapping()
-    public ResponseEntity<List<SourceDTO>>  getAllSources(){
-        List<SourceDTO> sourceDTOS = sourceService.getAllSource();
+    public ResponseEntity<PageCustumerSource>  getAllSources(
+            @RequestParam(required = false ,defaultValue = "0") int page,
+            @RequestParam(required = false) String q
+    ){
+        PageCustumerSource sourceDTOS = sourceService.getAllSource(page,q);
         return new ResponseEntity<>( sourceDTOS, HttpStatus.OK);
     }
 
-    @GetMapping("search")
-    public ResponseEntity <List<SourceDTO>> getForNames(@RequestParam(name = "q") @Valid @Size( min = 3, max=10 ) String q){
-        List<SourceDTO> sourceDTOS = sourceService.searchForName(q);
-        return new ResponseEntity<>(sourceDTOS,HttpStatus.OK) ;
-    }
+
 }

@@ -55,12 +55,14 @@ private AuthorService authorService;
         AuthorBaseDTO authorBaseDTO = new AuthorBaseDTO();
         authorBaseDTO.setName("santiupdate");
         authorBaseDTO.setLastname("ramirez");
+        when(authorRepository.findById(1)).thenReturn(Optional.of(author1));
       when(authorService.updateAuthor(1, author1)).thenReturn( authorBaseDTO);
 
       AuthorBaseDTO authorTest = authorService.updateAuthor(1,author1);
 
 
             assertEquals(authorTest.getName(),authorBaseDTO.getName());
+            assertNotEquals(author1.getName(),authorTest.getName());
 
 
     }

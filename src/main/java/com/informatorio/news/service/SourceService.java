@@ -5,10 +5,15 @@ import com.informatorio.news.domain.Source;
 import com.informatorio.news.dto.source.SourceBaseDTO;
 import com.informatorio.news.dto.source.SourceDTO;
 import com.informatorio.news.repository.SourceRepository;
+import com.informatorio.news.util.PageCustumerSource;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+
 import java.util.stream.Collectors;
 
 @Service
@@ -43,14 +48,28 @@ public class SourceService {
         return "delete source with id number:" + id;
     }
 
-    public List<SourceDTO> getAllSource(){
-        List<Source> sources = sourceRepository.findAll();
-        List<SourceDTO> sourceBaseDTOS = sources.stream().map(source -> sourceConverter.toDto(source)).collect(Collectors.toList());
-    return sourceBaseDTOS;
+    public PageCustumerSource getAllSource(int page,String q){
+        Pageable pageable = PageRequest.of(page,3);
+      PageCustumerSource pageCustumerSource = new PageCustumerSource();
+        if(q != null){
+            Page<Source> sources = sourceRepository.findByName(q,pageable);
+            pageCustumerSource.setStatus(HttpStatus.OK);
+            pageCustumerSource.setPage(sources.getTotalPages());
+            pageCustumerSource.setSize(sources.getSize());
+            pageCustumerSource.setTotalResult(sources.getTotalElements());
+            pageCustumerSource.setContent(sources.getContent().stream().map(source -> sourceConverter.toDto(source)).collect(Collectors.toList()));
+        }else{
+            Page<Source> sources = sourceRepository.findAll(pageable);
+            pageCustumerSource.setStatus(HttpStatus.OK);
+            pageCustumerSource.setPage(sources.getTotalPages());
+            pageCustumerSource.setSize(sources.getSize());
+            pageCustumerSource.setTotalResult(sources.getTotalElements());
+            pageCustumerSource.setContent(sources.getContent().stream().map(source -> sourceConverter.toDto(source)).collect(Collectors.toList()));
+        }
+
+
+    return pageCustumerSource;
     }
 
-    public List<SourceDTO> searchForName(String q){
-        List<Source> sources = sourceRepository.findByName(q);
-        return sources.stream().map(source -> sourceConverter.toDto(source)).collect(Collectors.toList());
-    }
+
 }

@@ -1,6 +1,8 @@
 package com.informatorio.news.domain;
 
 import javax.persistence.*;
+import javax.validation.constraints.FutureOrPresent;
+import javax.validation.constraints.NotBlank;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,8 +12,10 @@ public class Source {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
+    @NotBlank
     private String name;
     private String code;
+    @FutureOrPresent
     private LocalDate createAt;
     @OneToMany(mappedBy = "source", cascade = CascadeType.ALL)
     private List<Article> articles = new ArrayList<>();
