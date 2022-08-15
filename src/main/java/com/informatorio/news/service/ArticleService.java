@@ -38,7 +38,7 @@ public class ArticleService {
 
     //Get All Articles Created
     public PageCustumerArticle getAllArticle(int page, Boolean published,String query){
-        Pageable pageable = PageRequest.of(page,3 );
+        Pageable pageable = PageRequest.of(page-1,3 );
         PageCustumerArticle pageCustumerArticle = new PageCustumerArticle();
         if(query  != null){
             Page<Article> authorsPaged = articleRepository.searchArticle(query,pageable);

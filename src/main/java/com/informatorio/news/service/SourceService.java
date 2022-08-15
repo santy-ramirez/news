@@ -3,7 +3,6 @@ package com.informatorio.news.service;
 import com.informatorio.news.converter.SourceConverter;
 import com.informatorio.news.domain.Source;
 import com.informatorio.news.dto.source.SourceBaseDTO;
-import com.informatorio.news.dto.source.SourceDTO;
 import com.informatorio.news.repository.SourceRepository;
 import com.informatorio.news.util.PageCustumerSource;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,7 +48,7 @@ public class SourceService {
     }
 
     public PageCustumerSource getAllSource(int page,String q){
-        Pageable pageable = PageRequest.of(page,3);
+        Pageable pageable = PageRequest.of(page-1,3);
       PageCustumerSource pageCustumerSource = new PageCustumerSource();
         if(q != null){
             Page<Source> sources = sourceRepository.findByName(q,pageable);

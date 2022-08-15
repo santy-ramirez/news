@@ -10,13 +10,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import javax.validation.constraints.Positive;
+import javax.validation.constraints.Size;
 import java.time.LocalDate;
 import java.util.List;
 
 
+@Validated
 
 @RestController
 @RequestMapping("/author")
@@ -38,7 +42,7 @@ public class AuthorController {
     }
 
     @PutMapping("{id}")
-    public ResponseEntity<AuthorBaseDTO> updateAuthor(@PathVariable() Integer id, @RequestBody Author author){
+    public ResponseEntity<AuthorBaseDTO> updateAuthor(@PathVariable() Integer id, @RequestBody @Valid Author author){
         AuthorBaseDTO authorBaseDTO = authorService.updateAuthor(id,author);
         return new ResponseEntity<AuthorBaseDTO>(authorBaseDTO,HttpStatus.OK);
 
@@ -48,9 +52,9 @@ public class AuthorController {
     return new ResponseEntity<String>( authorService.deleteAuthor(id),HttpStatus.NO_CONTENT);
     }
     @GetMapping()
-    public ResponseEntity<PageCustumerAuthor> getAll(@RequestParam(required = false, defaultValue = "0") int page,
-                                                     @RequestParam(required = false ) String query,
-                                                     @RequestParam(required = false, defaultValue = "2022-08-23")
+    public ResponseEntity<PageCustumerAuthor> getAll(@RequestParam(required = false, defaultValue = "1") @Valid @Positive int page,
+                                                     @RequestParam(required = false )@Valid @Size(min = 3,max = 10) String query ,
+                                                     @RequestParam(required = false, defaultValue = "2022-08-23")@Valid
                                                      @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate createAt
                                                      ){
         PageCustumerAuthor authores = authorService.getAllAuthor(page,createAt,query);

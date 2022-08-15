@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 
 import javax.validation.Valid;
+import javax.validation.constraints.Positive;
 import javax.validation.constraints.Size;
 
 
@@ -40,7 +41,7 @@ public class ArticleController {
     }
 
     @GetMapping()
-    public ResponseEntity<PageCustumerArticle>  getAllArticles(@RequestParam(required = false,defaultValue = "0") int page,
+    public ResponseEntity<PageCustumerArticle>  getAllArticles(@RequestParam(required = false,defaultValue = "1")@Valid @Positive int page,
                                                                @RequestParam(required = false, defaultValue = "true") Boolean published,
                                                                         @RequestParam(required = false) @Valid @Size( min = 3, max=10 ) String query
 
@@ -57,7 +58,7 @@ public class ArticleController {
   }
 
     @PutMapping("{id}")
-    public ResponseEntity<ArticleBaseDTO> updateArticle(@PathVariable Integer id, @RequestBody Article article){
+    public ResponseEntity<ArticleBaseDTO> updateArticle(@PathVariable Integer id, @RequestBody @Valid Article article){
     ArticleBaseDTO articleBaseDTO =  articleService.updateArticle(id,article);
         return new ResponseEntity<ArticleBaseDTO>(articleBaseDTO,HttpStatus.CREATED);
 

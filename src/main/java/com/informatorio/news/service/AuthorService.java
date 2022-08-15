@@ -56,7 +56,7 @@ public class AuthorService {
     }
 
     public PageCustumerAuthor getAllAuthor(int page,LocalDate createAt, String query){
-    Pageable pageable = PageRequest.of(page, 3);
+    Pageable pageable = PageRequest.of(page-1, 3);
         PageCustumerAuthor pageCustumerAuthor = new PageCustumerAuthor();
         if( query != null){
           Page<Author> paged = authorRepository.searchAuthor(query,pageable);

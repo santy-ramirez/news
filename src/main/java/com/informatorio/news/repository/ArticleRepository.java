@@ -17,6 +17,8 @@ public interface ArticleRepository  extends JpaRepository<Article,Integer> {
 
     Page<Article> findAllByPublished(Boolean published, Pageable pageable);
     @Query("SELECT p FROM Article p WHERE " +
-            "p.title LIKE CONCAT('%',:query, '%')")
+            "p.title   LIKE CONCAT('%',:query, '%')"+
+            "Or p.description LIKE CONCAT('%', :query, '%')"+
+            "Or p.content LIKE CONCAT('%', :query, '%')")
     Page<Article> searchArticle(String query,Pageable pageable);
 }

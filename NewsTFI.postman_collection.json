@@ -2,10 +2,769 @@
 	"info": {
 		"_postman_id": "4ebe1081-6a4f-455a-abe6-d3de31636f99",
 		"name": "NewsTFI",
+		"description": "news Api hecho con spring-boot\n\n# About Project\n\n  \nProyecto propuesto por el informatorio chaco, en el marco del curso de especializaciones de tecnologias,con la colaboración de las universidades:UTTN , UNCAUS y la empresa Globant.\n\n## **Enunciado:**\n\nEl Informatorio planea lanzar en varias plataformas (Web, iOS y Android) una aplicación donde se publicaran varios articulos de noticias. Los articulos pueden pertenecer a diferentes fuentes (periodicos, blogs,etc) y la autoria de cada uno es por un autor (solo uno).",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "21526249"
 	},
 	"item": [
+		{
+			"name": "Author",
+			"item": [
+				{
+					"name": "CreateAuthor",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "\n{\n        \"name\": \"Jonatan\",\n\t\t\"lastname\": \"Viale\",\n\t\t\"fullName\": \"Jonatan Viale\",\n\t\t\"createAt\": \"2023-09-15\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/author",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"author"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "ResponseCreateAuthor",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "\n{\n        \"name\": \"Jonatan\",\n\t\t\"lastname\": \"Viale\",\n\t\t\"fullName\": \"Jonatan Viale\",\n\t\t\"createAt\": \"2023-09-15\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/api/v1/author",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"author"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 14 Aug 2022 23:20:48 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"name\": \"Jonatan\",\n    \"lastname\": \"Viale\",\n    \"createAt\": \"2023-09-15\"\n}"
+						}
+					]
+				},
+				{
+					"name": "DeleteAuthor",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v1/author/6",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"author",
+								"6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateAuthor",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n   \"name\": \"Marsden\",\n    \"lastname\": \"Sexton\",\n    \"fullName\": \"Marsden Sexton\",\n    \"createAt\": \"2023-09-17\"\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/author/3",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"author",
+								"3"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "ResponseUpdateAuthor",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n   \"name\": \"Marsden\",\n    \"lastname\": \"Sexton\",\n    \"fullName\": \"Marsden Sexton\",\n    \"createAt\": \"2023-09-17\"\n}\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/api/v1/author/3",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"author",
+										"3"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 14 Aug 2022 23:24:47 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"name\": \"Marsden\",\n    \"lastname\": \"Sexton\",\n    \"createAt\": \"2022-09-11\"\n}"
+						}
+					]
+				},
+				{
+					"name": "ListAllAuthors",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v1/author",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"author"
+							],
+							"query": [
+								{
+									"key": "createAt",
+									"value": "2023-09-09",
+									"description": "Filtra los autores creados despues de una fecha dada",
+									"disabled": true
+								},
+								{
+									"key": "query",
+									"value": "ra",
+									"description": "Trae por nombre y apellido, conincide en cualquier parte del fullname ,la palabra ingresada tiene que ser mayor a tres caracteres",
+									"disabled": true
+								},
+								{
+									"key": "page",
+									"value": "1",
+									"description": "Trae el recurso paginado",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "ResponseForDefauld",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/api/v1/author",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"author"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "3",
+											"disabled": true
+										},
+										{
+											"key": "createAt",
+											"value": "2023-09-09",
+											"disabled": true
+										},
+										{
+											"key": "query",
+											"value": "ramirez",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 14 Aug 2022 23:11:44 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"OK\",\n    \"page\": 3,\n    \"size\": 3,\n    \"totalResult\": 9,\n    \"content\": [\n        {\n            \"name\": \"Marsden\",\n            \"lastname\": \"Sexton\",\n            \"createAt\": \"2023-09-16\",\n            \"fullName\": \"Marsden Sexton\",\n            \"articles\": [\n                {\n                    \"id\": 3,\n                    \"title\": \"El bitcoin baja de nuevo a 20 mil dolares\",\n                    \"description\": \"Deja en las ruinas a el salvador\",\n                    \"url\": \"https:/hola.com/articulo4\",\n                    \"urlToImage\": \"https:/hola.com/imgdearticulo4\",\n                    \"content\": \"Por esta razon el salvador  decide despedir al 50 porciento de sus empleados, dejando asi a miles de familias en a calle .\",\n                    \"publishedAt\": \"2022-09-10\",\n                    \"published\": true\n                },\n                {\n                    \"id\": 6,\n                    \"title\": \"La Argentina con la inflacion mas alta de la region\",\n                    \"description\": \"Es el pais con mayor indice de inflacion de sudamerica \",\n                    \"url\": \"https:/hola.com/articulo7\",\n                    \"urlToImage\": \"https:/hola.com/imgdearticulo7\",\n                    \"content\": \"Es el pais con mayor porcentaje de inflacion, uan superando a la Venezuela de Maduro, seguido por chile con el 1% mensual, y estos dos paieces superando el 5 % mensual.\",\n                    \"publishedAt\": \"2022-10-10\",\n                    \"published\": false\n                }\n            ]\n        },\n        {\n            \"name\": \"Quemby\",\n            \"lastname\": \"Mcfadden\",\n            \"createAt\": \"2022-09-11\",\n            \"fullName\": \"Quemby Mcfadden\",\n            \"articles\": [\n                {\n                    \"id\": 4,\n                    \"title\": \"Los productores argentinos no quieren exportar la soja\",\n                    \"description\": \"Y el Banco Central Se queda sin reservas \",\n                    \"url\": \"https:/hola.com/articulo5\",\n                    \"urlToImage\": \"https:/hola.com/imgdearticulo5\",\n                    \"content\": \"Dejando a la argentina a unas de las peores crisis economicas de su historia, incluso algunos economistas dicen qque sera peor que el del 2001 .\",\n                    \"publishedAt\": \"2022-10-10\",\n                    \"published\": true\n                }\n            ]\n        },\n        {\n            \"name\": \"Carter\",\n            \"lastname\": \"Washington\",\n            \"createAt\": \"2023-09-06\",\n            \"fullName\": \"Carter Washington\",\n            \"articles\": [\n                {\n                    \"id\": 5,\n                    \"title\": \"Se vuelve abrir las inscripciones para el informatorio chaco\",\n                    \"description\": \"Es la decimo seta ves que se lleva a cabo este programa \",\n                    \"url\": \"https:/hola.com/articulo6\",\n                    \"urlToImage\": \"https:/hola.com/imgdearticulo6\",\n                    \"content\": \"Es un programa que lleva a cabo la subsecretaria de empleo de la provincia junto con la empresa globant y en colaboracion de las universidades de UNNE y UNCAUS .\",\n                    \"publishedAt\": \"2022-10-10\",\n                    \"published\": false\n                },\n                {\n                    \"id\": 7,\n                    \"title\": \"La pobresa en la Argentina supero 50%\",\n                    \"description\": \"El 50% del pais son pobres \",\n                    \"url\": \"https:/hola.com/articulo8\",\n                    \"urlToImage\": \"https:/hola.com/imgdearticulo8\",\n                    \"content\": \"El 50 % son pobres la clase medio desaparecio y la estructura social quedo simplemente formado por dos estructuras la clase pobre y la clase politica.\",\n                    \"publishedAt\": \"2022-10-10\",\n                    \"published\": true\n                },\n                {\n                    \"id\": 8,\n                    \"title\": \"La crisis en Argentina se vuelve a repetir\",\n                    \"description\": \"Como en el 2001 la crisis economica en la argentina se vuelve a repetir \",\n                    \"url\": \"https:/hola.com/articulo8\",\n                    \"urlToImage\": \"https:/hola.com/imgdearticulo9\",\n                    \"content\": \"El 50 % son pobres la clase medio desaparecio y la estructura social quedo simplemente formado por dos estructuras la clase pobre y la clase politica.\",\n                    \"publishedAt\": \"2022-10-10\",\n                    \"published\": false\n                }\n            ]\n        }\n    ]\n}"
+						},
+						{
+							"name": "ResponseQueryFullName",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/api/v1/author?query=ramirez",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"author"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "3",
+											"disabled": true
+										},
+										{
+											"key": "createAt",
+											"value": "2023-09-09",
+											"disabled": true
+										},
+										{
+											"key": "createAt",
+											"value": "2023-05-09",
+											"disabled": true
+										},
+										{
+											"key": "query",
+											"value": "ramirez"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 14 Aug 2022 23:04:31 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"OK\",\n    \"page\": 3,\n    \"size\": 1,\n    \"totalResult\": 1,\n    \"content\": [\n        {\n            \"name\": \"Santiago\",\n            \"lastname\": \"Ramirez\",\n            \"createAt\": \"2022-08-23\",\n            \"fullName\": \"Santiago Ramirez\",\n            \"articles\": [\n                {\n                    \"id\": 1,\n                    \"title\": \"El Dolar  bluevuelve a subir\",\n                    \"description\": \"El banco central vende 400 millones de dolares \",\n                    \"url\": \"https:/hola.com/articulo2\",\n                    \"urlToImage\": \"https:/hola.com/imgdearticulo2\",\n                    \"content\": \"binance por esta razon decide despedir al 50 porciento de sus empleados, dejando asi a miles de familias en a calle .\",\n                    \"publishedAt\": \"2022-08-10\",\n                    \"published\": false\n                },\n                {\n                    \"id\": 2,\n                    \"title\": \"El riego Pais vuelve a Subir\",\n                    \"description\": \"El mercado Argentino en Riego \",\n                    \"url\": \"https:/hola.com/articulo3\",\n                    \"urlToImage\": \"https:/hola.com/imgdearticulo3\",\n                    \"content\": \"El banco central por esta razon decide despedir al 50 porciento de sus empleados, dejando asi a miles de familias en a calle .\",\n                    \"publishedAt\": \"2022-08-10\",\n                    \"published\": true\n                }\n            ]\n        }\n    ]\n}"
+						},
+						{
+							"name": "FilterAuthorAfterDate",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/api/v1/author?createAt=2023-05-09",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"author"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "3",
+											"disabled": true
+										},
+										{
+											"key": "createAt",
+											"value": "2023-09-09",
+											"disabled": true
+										},
+										{
+											"key": "createAt",
+											"value": "2023-05-09"
+										},
+										{
+											"key": "query",
+											"value": "ramirez",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 14 Aug 2022 23:08:48 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"OK\",\n    \"page\": 3,\n    \"size\": 2,\n    \"totalResult\": 6,\n    \"content\": [\n        {\n            \"name\": \"Marsden\",\n            \"lastname\": \"Sexton\",\n            \"createAt\": \"2023-09-16\",\n            \"fullName\": \"Marsden Sexton\",\n            \"articles\": [\n                {\n                    \"id\": 3,\n                    \"title\": \"El bitcoin baja de nuevo a 20 mil dolares\",\n                    \"description\": \"Deja en las ruinas a el salvador\",\n                    \"url\": \"https:/hola.com/articulo4\",\n                    \"urlToImage\": \"https:/hola.com/imgdearticulo4\",\n                    \"content\": \"Por esta razon el salvador  decide despedir al 50 porciento de sus empleados, dejando asi a miles de familias en a calle .\",\n                    \"publishedAt\": \"2022-09-10\",\n                    \"published\": true\n                },\n                {\n                    \"id\": 6,\n                    \"title\": \"La Argentina con la inflacion mas alta de la region\",\n                    \"description\": \"Es el pais con mayor indice de inflacion de sudamerica \",\n                    \"url\": \"https:/hola.com/articulo7\",\n                    \"urlToImage\": \"https:/hola.com/imgdearticulo7\",\n                    \"content\": \"Es el pais con mayor porcentaje de inflacion, uan superando a la Venezuela de Maduro, seguido por chile con el 1% mensual, y estos dos paieces superando el 5 % mensual.\",\n                    \"publishedAt\": \"2022-10-10\",\n                    \"published\": false\n                }\n            ]\n        },\n        {\n            \"name\": \"Carter\",\n            \"lastname\": \"Washington\",\n            \"createAt\": \"2023-09-06\",\n            \"fullName\": \"Carter Washington\",\n            \"articles\": [\n                {\n                    \"id\": 5,\n                    \"title\": \"Se vuelve abrir las inscripciones para el informatorio chaco\",\n                    \"description\": \"Es la decimo seta ves que se lleva a cabo este programa \",\n                    \"url\": \"https:/hola.com/articulo6\",\n                    \"urlToImage\": \"https:/hola.com/imgdearticulo6\",\n                    \"content\": \"Es un programa que lleva a cabo la subsecretaria de empleo de la provincia junto con la empresa globant y en colaboracion de las universidades de UNNE y UNCAUS .\",\n                    \"publishedAt\": \"2022-10-10\",\n                    \"published\": false\n                },\n                {\n                    \"id\": 7,\n                    \"title\": \"La pobresa en la Argentina supero 50%\",\n                    \"description\": \"El 50% del pais son pobres \",\n                    \"url\": \"https:/hola.com/articulo8\",\n                    \"urlToImage\": \"https:/hola.com/imgdearticulo8\",\n                    \"content\": \"El 50 % son pobres la clase medio desaparecio y la estructura social quedo simplemente formado por dos estructuras la clase pobre y la clase politica.\",\n                    \"publishedAt\": \"2022-10-10\",\n                    \"published\": true\n                },\n                {\n                    \"id\": 8,\n                    \"title\": \"La crisis en Argentina se vuelve a repetir\",\n                    \"description\": \"Como en el 2001 la crisis economica en la argentina se vuelve a repetir \",\n                    \"url\": \"https:/hola.com/articulo8\",\n                    \"urlToImage\": \"https:/hola.com/imgdearticulo9\",\n                    \"content\": \"El 50 % son pobres la clase medio desaparecio y la estructura social quedo simplemente formado por dos estructuras la clase pobre y la clase politica.\",\n                    \"publishedAt\": \"2022-10-10\",\n                    \"published\": false\n                }\n            ]\n        },\n        {\n            \"name\": \"Selma\",\n            \"lastname\": \"Mckenzie\",\n            \"createAt\": \"2023-09-06\",\n            \"fullName\": \"Selma Mckenzie\",\n            \"articles\": [\n                {\n                    \"id\": 9,\n                    \"title\": \"La crisis en Argentina se vuelve a repetir\",\n                    \"description\": \"Como en el 2001 la crisis economica en la argentina se vuelve a repetir \",\n                    \"url\": \"https:/hola.com/articulo8\",\n                    \"urlToImage\": \"https:/hola.com/imgdearticulo9\",\n                    \"content\": \"El 50 % son pobres la clase medio desaparecio y la estructura social quedo simplemente formado por dos estructuras la clase pobre y la clase politica.\",\n                    \"publishedAt\": \"2022-10-10\",\n                    \"published\": false\n                }\n            ]\n        }\n    ]\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Source",
+			"item": [
+				{
+					"name": "CreateSource",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\":\"Las Garcitas En Linea\",\n    \"code\":\"Garcita-com\",\n    \"createAt\":\"2022-09-06\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/source",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"source"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "ResponseCreateSource",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\":\"Las Garcitas En Linea\",\n    \"code\":\"Garcita-com\",\n    \"createAt\":\"2022-09-06\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/api/v1/source",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"source"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 14 Aug 2022 23:26:15 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 6,\n    \"name\": \"Las Garcitas En Linea\",\n    \"code\": \"Garcita-com\",\n    \"createAt\": \"2022-09-06\"\n}"
+						}
+					]
+				},
+				{
+					"name": "DeleteSource",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v1/source/6",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"source",
+								"6"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "ResponseDeleteSource",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/api/v1/source/6",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"source",
+										"6"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "plain",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain;charset=UTF-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "30"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 14 Aug 2022 23:29:23 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "delete source with id number:6"
+						}
+					]
+				},
+				{
+					"name": "UpdateSource",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n      \"name\":\"ChacoTv\",\n    \"code\":\"Chaco-Tv\",\n    \"createAt\":\"2020-06-08\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/source/2",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"source",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetAllSource",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v1/source",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"source"
+							],
+							"query": [
+								{
+									"key": "q",
+									"value": "nacion",
+									"description": "Trae la query que coincide con el nombre del source\n",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "ResponseForDefauld",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/api/v1/source?q=nacion",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"source"
+									],
+									"query": [
+										{
+											"key": "q",
+											"value": "nacion"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 14 Aug 2022 23:13:02 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"OK\",\n    \"page\": 1,\n    \"size\": 3,\n    \"totalResult\": 3,\n    \"content\": [\n        {\n            \"id\": 3,\n            \"name\": \"Clarin\",\n            \"code\": \"Grop-clarin\",\n            \"createAt\": \"2022-09-06\",\n            \"articles\": [\n                {\n                    \"id\": 1,\n                    \"title\": \"El Dolar  bluevuelve a subir\",\n                    \"description\": \"El banco central vende 400 millones de dolares \",\n                    \"url\": \"https:/hola.com/articulo2\",\n                    \"urlToImage\": \"https:/hola.com/imgdearticulo2\",\n                    \"content\": \"binance por esta razon decide despedir al 50 porciento de sus empleados, dejando asi a miles de familias en a calle .\",\n                    \"publishedAt\": \"2022-08-10\",\n                    \"published\": false\n                },\n                {\n                    \"id\": 2,\n                    \"title\": \"El riego Pais vuelve a Subir\",\n                    \"description\": \"El mercado Argentino en Riego \",\n                    \"url\": \"https:/hola.com/articulo3\",\n                    \"urlToImage\": \"https:/hola.com/imgdearticulo3\",\n                    \"content\": \"El banco central por esta razon decide despedir al 50 porciento de sus empleados, dejando asi a miles de familias en a calle .\",\n                    \"publishedAt\": \"2022-08-10\",\n                    \"published\": true\n                },\n                {\n                    \"id\": 5,\n                    \"title\": \"Se vuelve abrir las inscripciones para el informatorio chaco\",\n                    \"description\": \"Es la decimo seta ves que se lleva a cabo este programa \",\n                    \"url\": \"https:/hola.com/articulo6\",\n                    \"urlToImage\": \"https:/hola.com/imgdearticulo6\",\n                    \"content\": \"Es un programa que lleva a cabo la subsecretaria de empleo de la provincia junto con la empresa globant y en colaboracion de las universidades de UNNE y UNCAUS .\",\n                    \"publishedAt\": \"2022-10-10\",\n                    \"published\": false\n                }\n            ]\n        },\n        {\n            \"id\": 4,\n            \"name\": \"La Nacion\",\n            \"code\": \"la-nacion\",\n            \"createAt\": \"2022-09-06\",\n            \"articles\": [\n                {\n                    \"id\": 3,\n                    \"title\": \"El bitcoin baja de nuevo a 20 mil dolares\",\n                    \"description\": \"Deja en las ruinas a el salvador\",\n                    \"url\": \"https:/hola.com/articulo4\",\n                    \"urlToImage\": \"https:/hola.com/imgdearticulo4\",\n                    \"content\": \"Por esta razon el salvador  decide despedir al 50 porciento de sus empleados, dejando asi a miles de familias en a calle .\",\n                    \"publishedAt\": \"2022-09-10\",\n                    \"published\": true\n                },\n                {\n                    \"id\": 6,\n                    \"title\": \"La Argentina con la inflacion mas alta de la region\",\n                    \"description\": \"Es el pais con mayor indice de inflacion de sudamerica \",\n                    \"url\": \"https:/hola.com/articulo7\",\n                    \"urlToImage\": \"https:/hola.com/imgdearticulo7\",\n                    \"content\": \"Es el pais con mayor porcentaje de inflacion, uan superando a la Venezuela de Maduro, seguido por chile con el 1% mensual, y estos dos paieces superando el 5 % mensual.\",\n                    \"publishedAt\": \"2022-10-10\",\n                    \"published\": false\n                },\n                {\n                    \"id\": 7,\n                    \"title\": \"La pobresa en la Argentina supero 50%\",\n                    \"description\": \"El 50% del pais son pobres \",\n                    \"url\": \"https:/hola.com/articulo8\",\n                    \"urlToImage\": \"https:/hola.com/imgdearticulo8\",\n                    \"content\": \"El 50 % son pobres la clase medio desaparecio y la estructura social quedo simplemente formado por dos estructuras la clase pobre y la clase politica.\",\n                    \"publishedAt\": \"2022-10-10\",\n                    \"published\": true\n                },\n                {\n                    \"id\": 8,\n                    \"title\": \"La crisis en Argentina se vuelve a repetir\",\n                    \"description\": \"Como en el 2001 la crisis economica en la argentina se vuelve a repetir \",\n                    \"url\": \"https:/hola.com/articulo8\",\n                    \"urlToImage\": \"https:/hola.com/imgdearticulo9\",\n                    \"content\": \"El 50 % son pobres la clase medio desaparecio y la estructura social quedo simplemente formado por dos estructuras la clase pobre y la clase politica.\",\n                    \"publishedAt\": \"2022-10-10\",\n                    \"published\": false\n                },\n                {\n                    \"id\": 9,\n                    \"title\": \"La crisis en Argentina se vuelve a repetir\",\n                    \"description\": \"Como en el 2001 la crisis economica en la argentina se vuelve a repetir \",\n                    \"url\": \"https:/hola.com/articulo8\",\n                    \"urlToImage\": \"https:/hola.com/imgdearticulo9\",\n                    \"content\": \"El 50 % son pobres la clase medio desaparecio y la estructura social quedo simplemente formado por dos estructuras la clase pobre y la clase politica.\",\n                    \"publishedAt\": \"2022-10-10\",\n                    \"published\": false\n                }\n            ]\n        },\n        {\n            \"id\": 5,\n            \"name\": \"Chaco Tv\",\n            \"code\": \"Chaco-tv\",\n            \"createAt\": \"2022-09-06\",\n            \"articles\": [\n                {\n                    \"id\": 4,\n                    \"title\": \"Los productores argentinos no quieren exportar la soja\",\n                    \"description\": \"Y el Banco Central Se queda sin reservas \",\n                    \"url\": \"https:/hola.com/articulo5\",\n                    \"urlToImage\": \"https:/hola.com/imgdearticulo5\",\n                    \"content\": \"Dejando a la argentina a unas de las peores crisis economicas de su historia, incluso algunos economistas dicen qque sera peor que el del 2001 .\",\n                    \"publishedAt\": \"2022-10-10\",\n                    \"published\": true\n                }\n            ]\n        }\n    ]\n}"
+						},
+						{
+							"name": "ResponseQuery",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/api/v1/source?q=nacion",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"source"
+									],
+									"query": [
+										{
+											"key": "q",
+											"value": "nacion"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 14 Aug 2022 23:14:58 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"OK\",\n    \"page\": 1,\n    \"size\": 3,\n    \"totalResult\": 1,\n    \"content\": [\n        {\n            \"id\": 4,\n            \"name\": \"La Nacion\",\n            \"code\": \"la-nacion\",\n            \"createAt\": \"2022-09-06\",\n            \"articles\": [\n                {\n                    \"id\": 3,\n                    \"title\": \"El bitcoin baja de nuevo a 20 mil dolares\",\n                    \"description\": \"Deja en las ruinas a el salvador\",\n                    \"url\": \"https:/hola.com/articulo4\",\n                    \"urlToImage\": \"https:/hola.com/imgdearticulo4\",\n                    \"content\": \"Por esta razon el salvador  decide despedir al 50 porciento de sus empleados, dejando asi a miles de familias en a calle .\",\n                    \"publishedAt\": \"2022-09-10\",\n                    \"published\": true\n                },\n                {\n                    \"id\": 6,\n                    \"title\": \"La Argentina con la inflacion mas alta de la region\",\n                    \"description\": \"Es el pais con mayor indice de inflacion de sudamerica \",\n                    \"url\": \"https:/hola.com/articulo7\",\n                    \"urlToImage\": \"https:/hola.com/imgdearticulo7\",\n                    \"content\": \"Es el pais con mayor porcentaje de inflacion, uan superando a la Venezuela de Maduro, seguido por chile con el 1% mensual, y estos dos paieces superando el 5 % mensual.\",\n                    \"publishedAt\": \"2022-10-10\",\n                    \"published\": false\n                },\n                {\n                    \"id\": 7,\n                    \"title\": \"La pobresa en la Argentina supero 50%\",\n                    \"description\": \"El 50% del pais son pobres \",\n                    \"url\": \"https:/hola.com/articulo8\",\n                    \"urlToImage\": \"https:/hola.com/imgdearticulo8\",\n                    \"content\": \"El 50 % son pobres la clase medio desaparecio y la estructura social quedo simplemente formado por dos estructuras la clase pobre y la clase politica.\",\n                    \"publishedAt\": \"2022-10-10\",\n                    \"published\": true\n                },\n                {\n                    \"id\": 8,\n                    \"title\": \"La crisis en Argentina se vuelve a repetir\",\n                    \"description\": \"Como en el 2001 la crisis economica en la argentina se vuelve a repetir \",\n                    \"url\": \"https:/hola.com/articulo8\",\n                    \"urlToImage\": \"https:/hola.com/imgdearticulo9\",\n                    \"content\": \"El 50 % son pobres la clase medio desaparecio y la estructura social quedo simplemente formado por dos estructuras la clase pobre y la clase politica.\",\n                    \"publishedAt\": \"2022-10-10\",\n                    \"published\": false\n                },\n                {\n                    \"id\": 9,\n                    \"title\": \"La crisis en Argentina se vuelve a repetir\",\n                    \"description\": \"Como en el 2001 la crisis economica en la argentina se vuelve a repetir \",\n                    \"url\": \"https:/hola.com/articulo8\",\n                    \"urlToImage\": \"https:/hola.com/imgdearticulo9\",\n                    \"content\": \"El 50 % son pobres la clase medio desaparecio y la estructura social quedo simplemente formado por dos estructuras la clase pobre y la clase politica.\",\n                    \"publishedAt\": \"2022-10-10\",\n                    \"published\": false\n                }\n            ]\n        }\n    ]\n}"
+						}
+					]
+				}
+			]
+		},
 		{
 			"name": "Article",
 			"item": [
@@ -16,7 +775,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n       \n    \"title\":\"El bitcoin vuelve a bajar\",\n    \"description\":\"Deja en ruinas al CEO de binance \",\n    \"url\":\"https:/hola.com/articulo2\",\n    \"urlToImage\":\"https:/hola.com/imgdearticulo2\",\n    \"content\":\"binance por esta razon decide despedir al 50 porciento de sus empleados, dejando asi a miles de familias en a calle .\",\n    \"publishedAt\":\"2022-08-06\",\n    \"author\":{\n            \"id\": 6\n            },\n    \"source\":{\n        \"id\":1\n        \n    }\n   \n\n}",
+							"raw": "{\n       \n    \"title\":\"La crisis en Argentina se vuelve a repetir\",\n    \"description\":\"Como en el 2001 la crisis economica en la argentina se vuelve a repetir \",\n    \"url\":\"https:/hola.com/articulo8\",\n    \"urlToImage\":\"https:/hola.com/imgdearticulo9\",\n    \"content\":\"El 50 % son pobres la clase medio desaparecio y la estructura social quedo simplemente formado por dos estructuras la clase pobre y la clase politica.\",\n    \"publishedAt\":\"2022-10-10\",\n    \"published\":false,\n    \"author\":{\n            \"id\": 5\n            },\n    \"source\":{\n        \"id\":4\n        \n    }\n   \n\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -44,7 +803,7 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/api/v1/article/7",
+							"raw": "localhost:8080/api/v1/article/16",
 							"host": [
 								"localhost"
 							],
@@ -53,27 +812,7 @@
 								"api",
 								"v1",
 								"article",
-								"7"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "getallarticle",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "localhost:8080/api/v1/article",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"api",
-								"v1",
-								"article"
+								"16"
 							]
 						}
 					},
@@ -86,7 +825,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n      \"title\": \"El riesgo pais alcanzo los 4000 puntos\",\n        \"description\": \"el riesgo pais en las ultimas 24 horas subio el 12%\"\n}",
+							"raw": "{\n      \n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -110,12 +849,12 @@
 					"response": []
 				},
 				{
-					"name": "SearchArticles",
+					"name": "getAllArticle",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/api/v1/article/search?query=bit",
+							"raw": "localhost:8080/api/v1/article",
 							"host": [
 								"localhost"
 							],
@@ -123,290 +862,356 @@
 							"path": [
 								"api",
 								"v1",
-								"article",
-								"search"
+								"article"
 							],
 							"query": [
+								{
+									"key": "published",
+									"value": "false",
+									"description": "Trae articulos que todabia no es\ntan publicadas",
+									"disabled": true
+								},
 								{
 									"key": "query",
-									"value": "bit"
-								}
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "Author",
-			"item": [
-				{
-					"name": "CreateAuthor",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"name\": \"\",\n  \"lastname\": \"Astlet\",\n  \"fullName\": \"Boot Astlet\",\n  \"createAt\": \"2022-08-23\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "localhost:8080/api/v1/author",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"api",
-								"v1",
-								"author"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "UpdateAuthor",
-					"request": {
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"name\":\"Erman\",\n    \"lastname\":\"Gonzalezz\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "localhost:8080/api/v1/author/11",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"api",
-								"v1",
-								"author",
-								"11"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "DleteAuthor",
-					"request": {
-						"method": "DELETE",
-						"header": [],
-						"url": {
-							"raw": "localhost:8080/api/v1/author/11",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"api",
-								"v1",
-								"author",
-								"11"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "ListAllAuthors",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "localhost:8080/api/v1/author",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"api",
-								"v1",
-								"author"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "ListForDate",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "localhost:8080/api/v1/author/alldate?localDate=2022-06-07",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"api",
-								"v1",
-								"author",
-								"alldate"
-							],
-							"query": [
-								{
-									"key": "localDate",
-									"value": "2022-06-07"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "SearchForFullName",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "localhost:8080/api/v1/author/test?query=santi",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"api",
-								"v1",
-								"author",
-								"test"
-							],
-							"query": [
+									"value": "pais",
+									"disabled": true
+								},
 								{
 									"key": "query",
-									"value": "santi"
+									"value": "bi",
+									"disabled": true
+								},
+								{
+									"key": "query",
+									"value": "bit",
+									"disabled": true
+								},
+								{
+									"key": "query",
+									"value": "bitcoin",
+									"disabled": true
+								},
+								{
+									"key": "query",
+									"value": "para",
+									"disabled": true
+								},
+								{
+									"key": "query",
+									"value": "razon",
+									"disabled": true
+								},
+								{
+									"key": "page",
+									"value": "1",
+									"disabled": true
 								}
 							]
 						}
 					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "Source",
-			"item": [
-				{
-					"name": "CreateSource",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"name\":\"ChacoTv\",\n    \"code\":\"Chaco-Tv\",\n    \"createAt\":\"2020-06-06\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
+					"response": [
+						{
+							"name": "ResponseForDefauld",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/api/v1/article",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"article"
+									],
+									"query": [
+										{
+											"key": "published",
+											"value": "false",
+											"description": "Trae articulos que todabia no esatan publicadas",
+											"disabled": true
+										},
+										{
+											"key": "page",
+											"value": "1",
+											"disabled": true
+										},
+										{
+											"key": "query",
+											"value": "pais",
+											"disabled": true
+										},
+										{
+											"key": "query",
+											"value": "bi",
+											"disabled": true
+										},
+										{
+											"key": "query",
+											"value": "bit",
+											"disabled": true
+										},
+										{
+											"key": "query",
+											"value": "bitcoin",
+											"disabled": true
+										},
+										{
+											"key": "query",
+											"value": "para",
+											"disabled": true
+										},
+										{
+											"key": "page",
+											"value": "0",
+											"disabled": true
+										}
+									]
 								}
-							}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Method"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Headers"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 14 Aug 2022 23:15:41 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"OK\",\n    \"page\": 2,\n    \"size\": 3,\n    \"totalResult\": 4,\n    \"content\": [\n        {\n            \"id\": 2,\n            \"title\": \"El riego Pais vuelve a Subir\",\n            \"description\": \"El mercado Argentino en Riego \",\n            \"url\": \"https:/hola.com/articulo3\",\n            \"urlToImage\": \"https:/hola.com/imgdearticulo3\",\n            \"content\": \"El banco central por esta razon decide despedir al 50 porciento de sus empleados, dejando asi a miles de familias en a calle .\",\n            \"publishedAt\": \"2022-08-10\",\n            \"published\": true,\n            \"author\": {\n                \"name\": \"Santiago\",\n                \"lastname\": \"Ramirez\",\n                \"createAt\": \"2022-08-23\"\n            },\n            \"source\": {\n                \"id\": 3,\n                \"name\": \"Clarin\",\n                \"code\": \"Grop-clarin\",\n                \"createAt\": \"2022-09-06\"\n            }\n        },\n        {\n            \"id\": 3,\n            \"title\": \"El bitcoin baja de nuevo a 20 mil dolares\",\n            \"description\": \"Deja en las ruinas a el salvador\",\n            \"url\": \"https:/hola.com/articulo4\",\n            \"urlToImage\": \"https:/hola.com/imgdearticulo4\",\n            \"content\": \"Por esta razon el salvador  decide despedir al 50 porciento de sus empleados, dejando asi a miles de familias en a calle .\",\n            \"publishedAt\": \"2022-09-10\",\n            \"published\": true,\n            \"author\": {\n                \"name\": \"Marsden\",\n                \"lastname\": \"Sexton\",\n                \"createAt\": \"2023-09-16\"\n            },\n            \"source\": {\n                \"id\": 4,\n                \"name\": \"La Nacion\",\n                \"code\": \"la-nacion\",\n                \"createAt\": \"2022-09-06\"\n            }\n        },\n        {\n            \"id\": 4,\n            \"title\": \"Los productores argentinos no quieren exportar la soja\",\n            \"description\": \"Y el Banco Central Se queda sin reservas \",\n            \"url\": \"https:/hola.com/articulo5\",\n            \"urlToImage\": \"https:/hola.com/imgdearticulo5\",\n            \"content\": \"Dejando a la argentina a unas de las peores crisis economicas de su historia, incluso algunos economistas dicen qque sera peor que el del 2001 .\",\n            \"publishedAt\": \"2022-10-10\",\n            \"published\": true,\n            \"author\": {\n                \"name\": \"Quemby\",\n                \"lastname\": \"Mcfadden\",\n                \"createAt\": \"2022-09-11\"\n            },\n            \"source\": {\n                \"id\": 5,\n                \"name\": \"Chaco Tv\",\n                \"code\": \"Chaco-tv\",\n                \"createAt\": \"2022-09-06\"\n            }\n        }\n    ]\n}"
 						},
-						"url": {
-							"raw": "localhost:8080/api/v1/source",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"api",
-								"v1",
-								"source"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "GetAllSource",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "localhost:8080/api/v1/source",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"api",
-								"v1",
-								"source"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "DeleteSource",
-					"request": {
-						"method": "DELETE",
-						"header": [],
-						"url": {
-							"raw": "localhost:8080/api/v1/source/3",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"api",
-								"v1",
-								"source",
-								"3"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "UpdateSource",
-					"request": {
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n      \"name\":\"ChacoTv\",\n    \"code\":\"Chaco-Tv\",\n    \"createAt\":\"2020-06-07\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
+						{
+							"name": "ResponseNotPublished",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/api/v1/article?published=false",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"article"
+									],
+									"query": [
+										{
+											"key": "published",
+											"value": "false",
+											"description": "Trae articulos que todabia no esatan publicadas"
+										},
+										{
+											"key": "page",
+											"value": "1",
+											"disabled": true
+										},
+										{
+											"key": "query",
+											"value": "pais",
+											"disabled": true
+										},
+										{
+											"key": "query",
+											"value": "bi",
+											"disabled": true
+										},
+										{
+											"key": "query",
+											"value": "bit",
+											"disabled": true
+										},
+										{
+											"key": "query",
+											"value": "bitcoin",
+											"disabled": true
+										},
+										{
+											"key": "query",
+											"value": "para",
+											"disabled": true
+										},
+										{
+											"key": "page",
+											"value": "0",
+											"disabled": true
+										}
+									]
 								}
-							}
-						},
-						"url": {
-							"raw": "localhost:8080/api/v1/source/2",
-							"host": [
-								"localhost"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Method"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Headers"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 14 Aug 2022 23:16:24 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
 							],
-							"port": "8080",
-							"path": [
-								"api",
-								"v1",
-								"source",
-								"2"
-							]
+							"cookie": [],
+							"body": "{\n    \"status\": \"OK\",\n    \"page\": 2,\n    \"size\": 3,\n    \"totalResult\": 5,\n    \"content\": [\n        {\n            \"id\": 1,\n            \"title\": \"El Dolar  bluevuelve a subir\",\n            \"description\": \"El banco central vende 400 millones de dolares \",\n            \"url\": \"https:/hola.com/articulo2\",\n            \"urlToImage\": \"https:/hola.com/imgdearticulo2\",\n            \"content\": \"binance por esta razon decide despedir al 50 porciento de sus empleados, dejando asi a miles de familias en a calle .\",\n            \"publishedAt\": \"2022-08-10\",\n            \"published\": false,\n            \"author\": {\n                \"name\": \"Santiago\",\n                \"lastname\": \"Ramirez\",\n                \"createAt\": \"2022-08-23\"\n            },\n            \"source\": {\n                \"id\": 3,\n                \"name\": \"Clarin\",\n                \"code\": \"Grop-clarin\",\n                \"createAt\": \"2022-09-06\"\n            }\n        },\n        {\n            \"id\": 5,\n            \"title\": \"Se vuelve abrir las inscripciones para el informatorio chaco\",\n            \"description\": \"Es la decimo seta ves que se lleva a cabo este programa \",\n            \"url\": \"https:/hola.com/articulo6\",\n            \"urlToImage\": \"https:/hola.com/imgdearticulo6\",\n            \"content\": \"Es un programa que lleva a cabo la subsecretaria de empleo de la provincia junto con la empresa globant y en colaboracion de las universidades de UNNE y UNCAUS .\",\n            \"publishedAt\": \"2022-10-10\",\n            \"published\": false,\n            \"author\": {\n                \"name\": \"Carter\",\n                \"lastname\": \"Washington\",\n                \"createAt\": \"2023-09-06\"\n            },\n            \"source\": {\n                \"id\": 3,\n                \"name\": \"Clarin\",\n                \"code\": \"Grop-clarin\",\n                \"createAt\": \"2022-09-06\"\n            }\n        },\n        {\n            \"id\": 6,\n            \"title\": \"La Argentina con la inflacion mas alta de la region\",\n            \"description\": \"Es el pais con mayor indice de inflacion de sudamerica \",\n            \"url\": \"https:/hola.com/articulo7\",\n            \"urlToImage\": \"https:/hola.com/imgdearticulo7\",\n            \"content\": \"Es el pais con mayor porcentaje de inflacion, uan superando a la Venezuela de Maduro, seguido por chile con el 1% mensual, y estos dos paieces superando el 5 % mensual.\",\n            \"publishedAt\": \"2022-10-10\",\n            \"published\": false,\n            \"author\": {\n                \"name\": \"Marsden\",\n                \"lastname\": \"Sexton\",\n                \"createAt\": \"2023-09-16\"\n            },\n            \"source\": {\n                \"id\": 4,\n                \"name\": \"La Nacion\",\n                \"code\": \"la-nacion\",\n                \"createAt\": \"2022-09-06\"\n            }\n        }\n    ]\n}"
+						},
+						{
+							"name": "ResponseQuery",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/api/v1/article?query=bitcoin",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"article"
+									],
+									"query": [
+										{
+											"key": "published",
+											"value": "false",
+											"description": "Trae articulos que todabia no esatan publicadas",
+											"disabled": true
+										},
+										{
+											"key": "page",
+											"value": "1",
+											"disabled": true
+										},
+										{
+											"key": "query",
+											"value": "pais",
+											"disabled": true
+										},
+										{
+											"key": "query",
+											"value": "bi",
+											"disabled": true
+										},
+										{
+											"key": "query",
+											"value": "bit",
+											"disabled": true
+										},
+										{
+											"key": "query",
+											"value": "bitcoin"
+										},
+										{
+											"key": "query",
+											"value": "para",
+											"disabled": true
+										},
+										{
+											"key": "page",
+											"value": "0",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Method"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Headers"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 14 Aug 2022 23:17:20 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"OK\",\n    \"page\": 1,\n    \"size\": 3,\n    \"totalResult\": 1,\n    \"content\": [\n        {\n            \"id\": 3,\n            \"title\": \"El bitcoin baja de nuevo a 20 mil dolares\",\n            \"description\": \"Deja en las ruinas a el salvador\",\n            \"url\": \"https:/hola.com/articulo4\",\n            \"urlToImage\": \"https:/hola.com/imgdearticulo4\",\n            \"content\": \"Por esta razon el salvador  decide despedir al 50 porciento de sus empleados, dejando asi a miles de familias en a calle .\",\n            \"publishedAt\": \"2022-09-10\",\n            \"published\": true,\n            \"author\": {\n                \"name\": \"Marsden\",\n                \"lastname\": \"Sexton\",\n                \"createAt\": \"2023-09-16\"\n            },\n            \"source\": {\n                \"id\": 4,\n                \"name\": \"La Nacion\",\n                \"code\": \"la-nacion\",\n                \"createAt\": \"2022-09-06\"\n            }\n        }\n    ]\n}"
 						}
-					},
-					"response": []
-				},
-				{
-					"name": "GetAllSourceWithArticles",
-					"request": {
-						"method": "GET",
-						"header": []
-					},
-					"response": []
+					]
 				}
 			]
 		}

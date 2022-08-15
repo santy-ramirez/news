@@ -12,8 +12,9 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import javax.validation.constraints.Positive;
 import javax.validation.constraints.Size;
-import java.util.List;
+
 @Validated
 @RestController
 @RequestMapping("/source")
@@ -27,12 +28,12 @@ public class SourceController {
     }
 
     @PostMapping
-    public ResponseEntity <SourceBaseDTO> createSource(@RequestBody  Source source){
+    public ResponseEntity <SourceBaseDTO> createSource(@RequestBody @Valid Source source){
         return new ResponseEntity<>(sourceService.createSource(source),HttpStatus.CREATED);
     }
 
     @PutMapping("{id}")
-    public ResponseEntity <SourceBaseDTO> updatesSources(@PathVariable Integer id,@RequestBody Source source){
+    public ResponseEntity <SourceBaseDTO> updatesSources(@PathVariable Integer id,@RequestBody @Valid Source source){
         SourceBaseDTO sourceUpdate = sourceService.updateSource(id,source);
         return new ResponseEntity<>(sourceUpdate,HttpStatus.CREATED) ;
     }
@@ -44,8 +45,8 @@ public class SourceController {
     }
     @GetMapping()
     public ResponseEntity<PageCustumerSource>  getAllSources(
-            @RequestParam(required = false ,defaultValue = "0") int page,
-            @RequestParam(required = false) String q
+            @RequestParam(required = false ,defaultValue = "1")@Valid @Positive int page,
+            @RequestParam(required = false)@Valid @Size(min = 3,max = 10) String q
     ){
         PageCustumerSource sourceDTOS = sourceService.getAllSource(page,q);
         return new ResponseEntity<>( sourceDTOS, HttpStatus.OK);
